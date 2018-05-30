@@ -10,7 +10,7 @@ services:
       - MYSQL_ROOT_PASSWORD=dev
       - MYSQL_USER=dev
       - MYSQL_PASSWORD=dev
-      - MYSQL_DATABASE=todo
+      - MYSQL_DATABASE=users
     volumes:
       - ./vendor/prooph/pdo-event-store/scripts/mysql:/docker-entrypoint-initdb.d
 
@@ -34,3 +34,4 @@ services:
       - mysql
     environment:
       - PROOPH_ENV=development
+      - APP_ENV=dev
