@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+
+  mysql:
+    image: mysql:5.7
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=dev
+      - MYSQL_USER=dev
+      - MYSQL_PASSWORD=dev
+      - MYSQL_DATABASE=todo
+    volumes:
+      - ./vendor/prooph/pdo-event-store/scripts/mysql:/docker-entrypoint-initdb.d
+
+  nginx:
+    image: prooph/nginx:www
+    ports:
+      - 8080:80
+      - 443:443
+      - 10081:10081
+      - 10082:10082
+    links:
+      - php:php
+    volumes:
+      - .:/var/www
+
+  php:
+    image: prooph/php:7.2-fpm
+    volumes:
+      - .:/var/www
+    depends_on:
+      - mysql
+    environment:
+      - PROOPH_ENV=development
