@@ -6,3 +6,4 @@ suites:
 
 extensions:
     Memio\SpecGen\MemioSpecGenExtension: ~
+    LeanPHP\PhpSpec\CodeCoverage\CodeCoverageExtension: ~

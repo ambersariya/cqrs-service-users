@@ -27,7 +27,9 @@ services:
       - .:/var/www
 
   php:
-    image: prooph/php:7.2-fpm
+    build:
+      context: .docker/php
+      dockerfile: Dockerfile.dev
     env_file:
       - ./.env
     volumes:
