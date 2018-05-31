@@ -17,7 +17,7 @@ class User extends AggregateRoot
     public $uuid;
     public $credentials;
     public $name;
-    
+
     public static function create(UuidInterface $uuid, Credentials $credentials, Name $name): self
     {
         $user = new self();
@@ -28,11 +28,9 @@ class User extends AggregateRoot
 
     protected function whenUserWasCreated(UserWasCreatedEvent $event): void
     {
-
         $this->uuid = $event->getUuid();
         $this->credentials = $event->getCredentials();
         $this->name = $event->getName();
-
     }
 
     protected function aggregateId(): string

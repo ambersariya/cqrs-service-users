@@ -8,9 +8,7 @@ use App\Domain\User\ValueObject\Auth\HashedPassword;
 use App\Domain\User\ValueObject\Email;
 use App\Domain\User\ValueObject\Name;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Ramsey\Uuid\Uuid;
-use Ramsey\Uuid\UuidInterface;
 
 class UserWasCreatedEventSpec extends ObjectBehavior
 {
