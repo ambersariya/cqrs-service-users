@@ -2,6 +2,7 @@
 
 namespace App\Domain\User;
 
+use App\Domain\User\Event\UserWasCreated\UserWasCreatedEvent;
 use App\Domain\User\ValueObject\Auth\Credentials;
 use App\Domain\User\ValueObject\Name;
 use Prooph\EventSourcing\AggregateChanged;
@@ -18,19 +19,20 @@ class User extends AggregateRoot
     public $name;
 
 
-    public static function create(UuidInterface $uuid, Credentials $credentials, Name $name)
+    public static function create(UuidInterface $uuid, Credentials $credentials, Name $name): self
     {
         $user = new self();
-//        $user->uuid = $uuid;
-//        $user->credentials = $credentials;
-//        $user->name = $name;
-//        $user->recordThat(new UserWasCreated());
+        $user->recordThat(UserWasCreatedEvent::withData($uuid, $credentials, $name));
 
         return $user;
     }
 
-    protected function whenUserWasCreated(): void
+    protected function whenUserWasCreated(UserWasCreatedEvent $event): void
     {
+
+        $this->uuid = $event->getUuid();
+        $this->credentials = $event->getCredentials();
+        $this->name = $event->getName();
 
     }
 
@@ -44,6 +46,11 @@ class User extends AggregateRoot
      */
     protected function apply(AggregateChanged $event): void
     {
-        // TODO: Implement apply() method.
+
+    }
+
+    protected function determineEventHandlerMethodFor(AggregateChanged $e): string
+    {
+        return 'when' . implode(array_slice(explode('\\', get_class($e)), -1));
     }
 }

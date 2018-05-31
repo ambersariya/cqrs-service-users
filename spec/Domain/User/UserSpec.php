@@ -27,6 +27,7 @@ class UserSpec extends ObjectBehavior
     }
 
 
+
 //    function it_should_have_email()
 //    {
 //        $this->credentials->email->toString()->shouldBeEqualTo('test@bob.com');

@@ -29,6 +29,7 @@ class UserFactory
 
             throw new UserAlreadyExistsException();
         }
+
         return User::create($uuid, $credentials, $name);
 
     }
