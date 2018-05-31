@@ -6,4 +6,8 @@ suites:
 
 extensions:
     Memio\SpecGen\MemioSpecGenExtension: ~
-    LeanPHP\PhpSpec\CodeCoverage\CodeCoverageExtension: ~
+    LeanPHP\PhpSpec\CodeCoverage\CodeCoverageExtension:
+        whitelist:
+            - src
+        blacklist_files:
+            - src/Kernel.php
