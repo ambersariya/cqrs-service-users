@@ -17,8 +17,7 @@ class User extends AggregateRoot
     public $uuid;
     public $credentials;
     public $name;
-
-
+    
     public static function create(UuidInterface $uuid, Credentials $credentials, Name $name): self
     {
         $user = new self();
@@ -43,14 +42,26 @@ class User extends AggregateRoot
 
     /**
      * Apply given event
+     *
+     * @param AggregateChanged $e
      */
-    protected function apply(AggregateChanged $event): void
+    protected function apply(AggregateChanged $e): void
     {
-
+        $handler = $this->determineEventHandlerMethodFor($e);
+        if (!method_exists($this, $handler)) {
+            throw new \RuntimeException(sprintf(
+                'Missing event handler method %s for aggregate root %s',
+                $handler,
+                get_class($this)
+            ));
+        }
+        $this->{$handler}($e);
     }
 
     protected function determineEventHandlerMethodFor(AggregateChanged $e): string
     {
-        return 'when' . implode(array_slice(explode('\\', get_class($e)), -1));
+        $eventClass = str_replace('Event', '', array_slice(explode('\\', get_class($e)), -1));
+
+        return 'when' . implode($eventClass);
     }
 }
