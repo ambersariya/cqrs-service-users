@@ -1,12 +1,8 @@
-#composer_suite_detection: true
 formatter.name: pretty
-#suites:
-#    app_suite:
-#        namespace: App
-#        psr4_prefix: App
 suites:
     default:
         namespace: App
         psr4_prefix: App
-        spec_prefix: Spec
-        spec_path: tests
+
+extensions:
+    Memio\SpecGen\MemioSpecGenExtension: ~

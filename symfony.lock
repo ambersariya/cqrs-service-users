@@ -74,11 +74,35 @@
     "egulias/email-validator": {
         "version": "2.1.4"
     },
+    "gnugat/redaktilo": {
+        "version": "v1.7.3"
+    },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },
     "marc-mabe/php-enum": {
         "version": "v3.0.1"
+    },
+    "memio/linter": {
+        "version": "v2.0.3"
+    },
+    "memio/memio": {
+        "version": "v2.0.0"
+    },
+    "memio/model": {
+        "version": "2.0.3"
+    },
+    "memio/pretty-printer": {
+        "version": "2.0.3"
+    },
+    "memio/spec-gen": {
+        "version": "v0.8.4"
+    },
+    "memio/twig-template-engine": {
+        "version": "v2.0.3"
+    },
+    "memio/validator": {
+        "version": "v2.0.3"
     },
     "monolog/monolog": {
         "version": "1.23.0"
