@@ -22,4 +22,9 @@ class Name
 
         return $name;
     }
+
+    public function toString()
+    {
+        return $this->firstname . ' ' .  $this->lastname ;
+    }
 }
