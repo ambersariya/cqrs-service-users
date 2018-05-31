@@ -18,17 +18,17 @@ class User extends AggregateRoot
     public $credentials;
     public $name;
 
-    public static function create(UuidInterface $uuid, Credentials $credentials, Name $name): self
+    public static function create(UserId $userId, Credentials $credentials, Name $name): self
     {
         $user = new self();
-        $user->recordThat(UserWasCreatedEvent::withData($uuid, $credentials, $name));
+        $user->recordThat(UserWasCreatedEvent::withData($userId, $credentials, $name));
 
         return $user;
     }
 
     protected function whenUserWasCreated(UserWasCreatedEvent $event): void
     {
-        $this->uuid = $event->getUuid();
+        $this->uuid = $event->getUserId();
         $this->credentials = $event->getCredentials();
         $this->name = $event->getName();
     }

@@ -3,11 +3,11 @@
 namespace App\Domain\User\Factory;
 
 use App\Domain\User\Exception\UserAlreadyExistsException;
+use App\Domain\User\Repository\UserCollectionInterface;
 use App\Domain\User\User;
+use App\Domain\User\UserId;
 use App\Domain\User\ValueObject\Auth\Credentials;
 use App\Domain\User\ValueObject\Name;
-use Ramsey\Uuid\UuidInterface;
-use App\Domain\User\Repository\UserCollectionInterface;
 
 /**
  * Class UserFactory
@@ -22,7 +22,7 @@ class UserFactory
         $this->userCollection = $userCollection;
     }
 
-    public function create(UuidInterface $uuid, Credentials $credentials, Name $name): User
+    public function create(UserId $userId, Credentials $credentials, Name $name): User
     {
 
         if ($this->userCollection->existsEmail($credentials->email)) {
@@ -30,7 +30,6 @@ class UserFactory
             throw new UserAlreadyExistsException();
         }
 
-        return User::create($uuid, $credentials, $name);
-
+        return User::create($userId, $credentials, $name);
     }
 }

@@ -2,21 +2,21 @@
 
 namespace App\Domain\User\Event\UserWasCreated;
 
+use App\Domain\User\UserId;
 use App\Domain\User\ValueObject\Auth\Credentials;
 use App\Domain\User\ValueObject\Name;
 use Prooph\EventSourcing\AggregateChanged;
-use Ramsey\Uuid\UuidInterface;
 
 class UserWasCreatedEvent extends AggregateChanged
 {
     private $credentials;
     private $name;
-    protected $uuid;
+    protected $userId;
 
-    public static function withData(UuidInterface $uuid, Credentials $credentials, Name $name): UserWasCreatedEvent
+    public static function withData(UserId $userId, Credentials $credentials, Name $name): UserWasCreatedEvent
     {
         /** @var self $event */
-        $event = self::occur($uuid->toString(), [
+        $event = self::occur($userId->toString(), [
             'name' => $name->toString(),
             'credentials' => [
                 'email' => $credentials->email->toString(),
@@ -24,7 +24,7 @@ class UserWasCreatedEvent extends AggregateChanged
             ],
         ]);
 
-        $event->uuid = $uuid;
+        $event->userId = $userId;
         $event->name = $name;
         $event->credentials = $credentials;
 
@@ -50,9 +50,8 @@ class UserWasCreatedEvent extends AggregateChanged
     /**
      * @return mixed
      */
-    public function getUuid(): UuidInterface
+    public function getUserId(): UserId
     {
-        return $this->uuid;
+        return $this->userId;
     }
-
 }

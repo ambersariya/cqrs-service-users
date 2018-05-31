@@ -3,9 +3,8 @@
 namespace spec\App\Application\Command\User\SignUp;
 
 use App\Application\Command\User\SignUp\SignUpCommand;
+use App\Domain\User\UserId;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
-use Ramsey\Uuid\UuidInterface;
 
 class SignUpCommandSpec extends ObjectBehavior
 {
@@ -18,17 +17,17 @@ class SignUpCommandSpec extends ObjectBehavior
     {
         $password = 'password';
         $email = 'email@example.org';
-        $uuid = '071bed1c-7351-40bc-ba2d-55102fe1e02f';
+        $userId = '071bed1c-7351-40bc-ba2d-55102fe1e02f';
         $firstname = 'ali';
         $lastname = 'g';
-        $this->beConstructedWith($uuid, $email, $password, $firstname, $lastname);
+        $this->beConstructedWith($userId, $email, $password, $firstname, $lastname);
     }
 
     function it_should_have_essential_values_set()
     {
         $this->credentials->hashedPassword->match('password')->shouldBeEqualTo(true);
         $this->credentials->email->toString()->shouldBeEqualTo('email@example.org');
-        $this->uuid->shouldHaveType(UuidInterface::class);
-        $this->uuid->toString()->shouldBeEqualTo('071bed1c-7351-40bc-ba2d-55102fe1e02f');
+        $this->userId->shouldHaveType(UserId::class);
+        $this->userId->toString()->shouldBeEqualTo('071bed1c-7351-40bc-ba2d-55102fe1e02f');
     }
 }

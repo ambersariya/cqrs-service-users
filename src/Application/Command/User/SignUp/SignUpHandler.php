@@ -24,7 +24,7 @@ class SignUpHandler
 
     public function __invoke(SignUpCommand $signUpCommand): void
     {
-        $aggregateRoot = $this->userFactory->create($signUpCommand->uuid, $signUpCommand->credentials, $signUpCommand->name);
+        $aggregateRoot = $this->userFactory->create($signUpCommand->userId, $signUpCommand->credentials, $signUpCommand->name);
         $this->userRepository->store($aggregateRoot);
     }
 }
