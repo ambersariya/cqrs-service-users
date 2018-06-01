@@ -9,8 +9,7 @@ prooph_event_store:
                     aggregate_translator: prooph_event_sourcing.aggregate_translator
 
 services:
-    Prooph\EventStore\Pdo\MySqlEventStore:
-        arguments: ['@prooph_event_store.message_factory', '@doctrine.pdo.connection', '@prooph_event_store.single_stream_strategy']
+    Prooph\EventStore\EventStore: "@prooph_event_store.user_store"
 
     doctrine.pdo.connection:
         class: PDO

@@ -2,14 +2,10 @@
 FROM composer:1.6.5 AS composer
 
 # Let's  grab the PHP FPM image we want to use
-FROM prooph/php:7.2-fpm
+FROM prooph/php:7.2-fpm-xdebug
 
 # copy the Composer PHAR from the Composer image into the PHP image
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 ENV COMPOSER_ALLOW_SUPERUSER=1
 # show that both Composer and PHP run as expected
 RUN composer --version && php --version
-
-RUN apk update && apk add --no-cache $PHPIZE_DEPS \
-    && pecl install xdebug-2.6.0 \
-    && docker-php-ext-enable xdebug

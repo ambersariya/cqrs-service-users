@@ -12,9 +12,9 @@ use Ramsey\Uuid\UuidInterface;
 class User extends AggregateRoot
 {
     /**
-     * @var UuidInterface
+     * @var UserId
      */
-    public $uuid;
+    public $userId;
     public $credentials;
     public $name;
 
@@ -28,14 +28,14 @@ class User extends AggregateRoot
 
     protected function whenUserWasCreated(UserWasCreatedEvent $event): void
     {
-        $this->uuid = $event->getUserId();
+        $this->userId = $event->getUserId();
         $this->credentials = $event->getCredentials();
         $this->name = $event->getName();
     }
 
     protected function aggregateId(): string
     {
-        return $this->uuid->toString();
+        return $this->userId->toString();
     }
 
     /**
