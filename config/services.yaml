@@ -19,7 +19,7 @@ services:
         exclude: '../src/{Entity,Migrations,Tests,Kernel.php}'
 
     App\Application\Command\:
-        resource: '../../src/Application/Command/*Handler.php'
+        resource: '../src/Application/Command/*Handler.php'
         tags: [{ name: 'prooph_service_bus.user_command_bus.route_target', message_detection: true }]
 
     ### UI
