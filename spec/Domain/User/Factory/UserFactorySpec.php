@@ -25,25 +25,24 @@ class UserFactorySpec extends ObjectBehavior
         $this->shouldHaveType(UserFactory::class);
     }
 
-    function it_should_return_user_object(Credentials $credentials, UserCollectionInterface $userCollection)
+    function it_should_return_user_object(UserCollectionInterface $userCollection)
     {
         $userId = UserId::fromString('cd480598-489a-4255-953d-925493b6c9f3');
-        $credentials->email = Email::fromString('test@bob.com');
-        $credentials->hashedPassword = HashedPassword::encode('bob.com');
+        $credentials = new Credentials(Email::fromString('test@bob.com'), HashedPassword::encode('bob.com'));
         $name = Name::fromString('bob', 'the builder');
-        $userCollection->existsEmail($credentials->email)->shouldBeCalled()->willReturn(false);
+        $userCollection->existsEmail($credentials->email())->shouldBeCalled()->willReturn(false);
 
         $this->create($userId, $credentials, $name)->shouldBeAnInstanceOf(User::class);
     }
 
     function it_should_throw_exception_if_user_already_exists(
         UserId $userId,
-        Credentials $credentials,
         Name $name,
         UserCollectionInterface $userCollection
     ) {
-        $credentials->email = Email::fromString('test@bob.com');
-        $userCollection->existsEmail($credentials->email)->shouldBeCalled()->willReturn(true);
+        $credentials = new Credentials(Email::fromString('test@bob.com'), HashedPassword::encode('bob.com'));
+
+        $userCollection->existsEmail($credentials->email())->shouldBeCalled()->willReturn(true);
 
         $this->shouldThrow(UserAlreadyExistsException::class)->duringCreate($userId, $credentials, $name);
     }

@@ -3,16 +3,15 @@ prooph_service_bus:
     user_command_bus:
       router:
         type: 'prooph_service_bus.command_bus_router'
-
-#  event_buses:
-#    user_event_bus:
-#      plugins:
-#        - 'prooph_service_bus.on_event_invoke_strategy'
-#      router:
-#        type: 'prooph_service_bus.event_bus_router'
-#        routes:
-#          App\Domain\User\Event\UserWasCreated\UserWasCreatedEvent:
-#            - 'Prooph\ProophessorDo\ProcessManager\SendTodoReminderMailProcessManager'
-#
-#          Prooph\ProophessorDo\Model\Todo\Event\TodoWasMarkedAsExpired:
-#            - 'Prooph\ProophessorDo\ProcessManager\SendTodoDeadlineExpiredMailProcessManager'
+        routes:
+            App\Application\Command\User\SignUp\SignUpCommand:
+                - 'App\Application\Command\User\SignUp\SignUpHandler'
+  event_buses:
+    user_event_bus:
+      plugins:
+        - 'prooph_service_bus.on_event_invoke_strategy'
+      router:
+        type: 'prooph_service_bus.event_bus_router'
+        routes:
+          App\Domain\User\Event\UserWasCreated\UserWasCreatedEvent:
+            - 'App\Domain\User\Event\UserWasCreated\UserWasCreatedEventHandler'

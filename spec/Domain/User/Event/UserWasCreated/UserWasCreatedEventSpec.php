@@ -36,7 +36,7 @@ class UserWasCreatedEventSpec extends ObjectBehavior
 
     function it_should_have_email()
     {
-        $this->getCredentials()->email->toString()->shouldBeEqualTo('test@bob.com');
+        $this->getCredentials()->email()->toString()->shouldBeEqualTo('test@bob.com');
     }
 
     function it_should_have_name()

@@ -19,8 +19,8 @@ class UserWasCreatedEvent extends AggregateChanged
         $event = self::occur($userId->toString(), [
             'name' => $name->toString(),
             'credentials' => [
-                'email' => $credentials->email->toString(),
-                'password' => $credentials->hashedPassword->toString(),
+                'email' => $credentials->email()->toString(),
+                'password' => $credentials->hashedPassword()->toString(),
             ],
         ]);
 

@@ -7,7 +7,7 @@ class Email
     /**
      * @var string
      */
-    public $email;
+    private $email;
 
     private function __construct(string $email)
     {

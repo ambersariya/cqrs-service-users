@@ -36,8 +36,19 @@ class SignUpHandlerSpec extends ObjectBehavior
         $password = 'test1234';
         $firstname = 'alice';
         $lastname = 'test';
+        $payload = [
+            'user_id' => '071bed1c-7351-40bc-ba2d-55102fe1e02f',
+            'name' => [
+                'first_name' => $firstname,
+                'last_name' => $lastname,
+            ],
+            'credentials' => [
+                'email' => $email,
+                'password' => $password,
+            ],
+        ];
 
-        $signUpCommand = new SignUpCommand('385af148-f046-4697-ba0f-61f76e69dc10', $email, $password, $firstname, $lastname);
+        $signUpCommand = new SignUpCommand($payload);
 
         $userFactory->create(
             Argument::type(UserId::class),
