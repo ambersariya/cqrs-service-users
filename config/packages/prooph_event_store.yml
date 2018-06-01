@@ -1,22 +1,31 @@
 prooph_event_store:
     stores:
         user_store:
-            event_store: Prooph\EventStore\Pdo\MySqlEventStore
+            event_store: 'app.event_store.default'
             repositories:
-                user_collection:
-                    repository_class: App\Infrastructure\User\Repository\EventStoreUserCollection
+                App\Infrastructure\User\Repository\EventStoreUserCollection:
                     aggregate_type: App\Domain\User\User
-                    aggregate_translator: prooph_event_sourcing.aggregate_translator
+                    aggregate_translator: Prooph\EventSourcing\EventStoreIntegration\AggregateTranslator
 
 services:
-    Prooph\EventStore\EventStore: "@prooph_event_store.user_store"
+    _defaults:
+        public: false
+        autowire: true
+
+    app.event_store.default:
+        class: Prooph\EventStore\Pdo\MySqlEventStore
+        arguments:
+            - '@prooph_event_store.message_factory'
+            - '@doctrine.pdo.connection'
+            - '@app.event_store.mysql.persistence_strategy'
 
     doctrine.pdo.connection:
         class: PDO
         factory: ['@database_connection', getWrappedConnection]
 
-    prooph_event_store.single_stream_strategy:
-        class: Prooph\EventStore\Pdo\PersistenceStrategy\MySqlSingleStreamStrategy
+    app.event_store.mysql.persistence_strategy:
+        class: Prooph\EventStore\Pdo\PersistenceStrategy\MySqlAggregateStreamStrategy
 
-    prooph_event_sourcing.aggregate_translator:
-        class: Prooph\EventSourcing\EventStoreIntegration\AggregateTranslator
+    Prooph\EventSourcing\EventStoreIntegration\AggregateTranslator: ~
+
+    App\Domain\User\Repository\UserRepositoryInterface: '@App\Infrastructure\User\Repository\EventStoreUserCollection'
