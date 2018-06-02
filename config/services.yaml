@@ -16,20 +16,24 @@ services:
     # this creates a service per class whose id is the fully-qualified class name
     App\:
         resource: '../src/*'
-        exclude: '../src/{Entity,Migrations,Tests,Kernel.php,Infrastructure}'
+        exclude: '../src/{Entity,Migrations,Tests,Kernel.php,Infrastructure,Application}'
 
     App\Application\Command\:
-        resource: '../src/Application/Command/*Handler.php'
+        resource: '../src/Application/Command/**/*Handler.php'
         tags: [{ name: 'prooph_service_bus.user_command_bus.route_target', message_detection: true }]
 
     ### UI
     App\UI\Cli\Command\:
         resource: '../src/UI/Cli/Command'
 
-    App\UI\Http\Rest\Controller\:
-        resource: '../src/UI/Http/Rest/Controller/*'
-        tags: [ 'controller.service_arguments' ]
+    # App\UI\Http\Rest\Controller\:
+    #     resource: '../src/UI/Http/Rest/Controller/*'
+    #     tags: [ 'controller.service_arguments' ]
 
-    App\UI\Http\Web\Controller\:
-        resource: '../src/UI/Http/Web/Controller/*'
-        tags: [ 'controller.service_arguments' ]
+    # App\UI\Http\Web\Controller\:
+    #     resource: '../src/UI/Http/Web/Controller/*'
+    #     tags: [ 'controller.service_arguments' ]
+
+    App\Infrastructure\User\Query\MySql\MysqlUserReadModelRepository: ~
+    App\Domain\User\Repository\UserCollectionInterface: '@App\Infrastructure\User\Query\MySql\MysqlUserReadModelRepository'
+

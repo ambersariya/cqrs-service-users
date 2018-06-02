@@ -1,10 +1,6 @@
 prooph_service_bus:
   command_buses:
-    user_command_bus:
-      router:
-        type: 'prooph_service_bus.command_bus_router'
-        routes:
-            App\Application\Command\User\SignUp\SignUpCommand: App\Application\Command\User\SignUp\SignUpHandler
+    user_command_bus: ~
 
   event_buses:
     user_event_bus:
