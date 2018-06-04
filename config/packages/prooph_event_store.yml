@@ -25,7 +25,7 @@ services:
         factory: ['@database_connection', getWrappedConnection]
 
     app.event_store.mysql.persistence_strategy:
-        class: Prooph\EventStore\Pdo\PersistenceStrategy\MySqlAggregateStreamStrategy
+        class: Prooph\EventStore\Pdo\PersistenceStrategy\MySqlSingleStreamStrategy # Prooph\EventStore\Pdo\PersistenceStrategy\MySqlAggregateStreamStrategy
 
     Prooph\EventSourcing\EventStoreIntegration\AggregateTranslator: ~
 

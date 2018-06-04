@@ -23,7 +23,6 @@ class CreateEventStreamCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-
         try {
             /** @var EventStore $eventStore */
             $eventStore = $this->getContainer()->get('prooph_event_store.user_store');
