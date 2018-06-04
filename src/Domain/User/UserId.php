@@ -40,4 +40,9 @@ class UserId implements ValueObjectInterface
     {
         return $this->toString();
     }
+
+    public static function generate(): UserId
+    {
+        return new self(Uuid::uuid4());
+    }
 }

@@ -7,7 +7,6 @@ use App\Domain\User\ValueObject\Auth\Credentials;
 use App\Domain\User\ValueObject\Name;
 use Prooph\EventSourcing\AggregateChanged;
 use Prooph\EventSourcing\AggregateRoot;
-use Ramsey\Uuid\UuidInterface;
 
 class User extends AggregateRoot
 {

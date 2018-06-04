@@ -12,6 +12,7 @@ class UserWasCreatedEvent extends AggregateChanged
     private $credentials;
     private $name;
     protected $userId;
+    protected $messageName = 'user-was-created';
 
     public static function withData(UserId $userId, Credentials $credentials, Name $name): UserWasCreatedEvent
     {

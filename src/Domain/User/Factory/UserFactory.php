@@ -25,7 +25,7 @@ class UserFactory
     public function create(UserId $userId, Credentials $credentials, Name $name): User
     {
         if ($this->userCollection->existsEmail($credentials->email())) {
-            throw new UserAlreadyExistsException();
+            throw new UserAlreadyExistsException(sprintf('User with email %s already exists', $credentials->email()));
         }
 
         return User::create($userId, $credentials, $name);

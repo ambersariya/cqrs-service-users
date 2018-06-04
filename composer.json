@@ -34,10 +34,11 @@
         "symfony/yaml": "^4.0"
     },
     "require-dev": {
-        "phpspec/phpspec": "^4.3",
         "doctrine/doctrine-fixtures-bundle": "^3.0",
+        "fzaninotto/faker": "^1.7",
         "leanphp/phpspec-code-coverage": "^4.2",
         "memio/spec-gen": "^0.8.4",
+        "phpspec/phpspec": "^4.3",
         "prolic/fpp": "dev-master",
         "symfony/dotenv": "^4.0",
         "symfony/maker-bundle": "^1.5",

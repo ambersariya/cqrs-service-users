@@ -74,6 +74,9 @@
     "egulias/email-validator": {
         "version": "2.1.4"
     },
+    "fzaninotto/faker": {
+        "version": "v1.7.1"
+    },
     "gnugat/redaktilo": {
         "version": "v1.7.3"
     },
