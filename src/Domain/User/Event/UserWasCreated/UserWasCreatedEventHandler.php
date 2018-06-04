@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Domain\User\Event\UserWasCreated;
 
-
-use Monolog\Logger;
 use Psr\Log\LoggerInterface;
 
 class UserWasCreatedEventHandler
