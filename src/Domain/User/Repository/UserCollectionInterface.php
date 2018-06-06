@@ -11,4 +11,6 @@ use App\Domain\User\ValueObject\Email;
 interface UserCollectionInterface
 {
     public function existsEmail(Email $email): bool;
+
+    public function deleteAll(): void;
 }

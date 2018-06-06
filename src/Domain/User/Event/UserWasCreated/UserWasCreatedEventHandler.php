@@ -21,5 +21,7 @@ class UserWasCreatedEventHandler
     public function _invoke(UserWasCreatedEvent $userWasCreatedEvent)
     {
         $this->logger->info($userWasCreatedEvent->messageName());
+        // send email
+        // notify some other service
     }
 }

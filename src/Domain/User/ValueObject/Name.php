@@ -5,9 +5,6 @@ namespace App\Domain\User\ValueObject;
 class Name
 {
     public $firstname;
-    /**
-     * @var string
-     */
     public $lastname;
 
     private function __construct(string $firstname, string $lastname)
@@ -25,6 +22,16 @@ class Name
 
     public function toString()
     {
-        return $this->firstname . ' ' .  $this->lastname ;
+        return $this->firstname . ' ' . $this->lastname;
+    }
+
+    public function firstname(): string
+    {
+        return $this->firstname;
+    }
+
+    public function lastname(): string
+    {
+        return $this->lastname;
     }
 }

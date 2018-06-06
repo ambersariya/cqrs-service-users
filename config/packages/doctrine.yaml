@@ -14,7 +14,8 @@ doctrine:
         default_table_options:
             charset: utf8mb4
             collate: utf8mb4_unicode_ci
-
+        types:
+            uuid:  Ramsey\Uuid\Doctrine\UuidType
         url: '%env(resolve:DATABASE_URL)%'
     orm:
         auto_generate_proxy_classes: '%kernel.debug%'
@@ -27,7 +28,7 @@ doctrine:
 #                dir: '%kernel.project_dir%/src/Entity'
 #                prefix: 'App\Entity'
 #                alias: App
-            Domain:
+            App:
                 is_bundle: false
                 type: yml
                 dir: '%kernel.project_dir%/config/mapping/orm/query'

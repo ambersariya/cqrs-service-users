@@ -13,7 +13,6 @@ class HashedPassword
     {
     }
 
-
     public static function fromHash(string $hashedPassword): self
     {
         $pass = new self;

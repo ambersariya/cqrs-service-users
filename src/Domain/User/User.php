@@ -27,9 +27,9 @@ class User extends AggregateRoot
 
     protected function whenUserWasCreated(UserWasCreatedEvent $event): void
     {
-        $this->userId = $event->getUserId();
-        $this->credentials = $event->getCredentials();
-        $this->name = $event->getName();
+        $this->userId = $event->userId();
+        $this->credentials = $event->credentials();
+        $this->name = $event->name();
     }
 
     protected function aggregateId(): string

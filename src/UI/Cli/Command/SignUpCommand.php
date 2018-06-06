@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\UI\Cli\Command;
 
-
 use App\Application\Command\User\SignUp\SignUpCommand as CreateUser;
 use App\Domain\User\UserId;
 use Prooph\ServiceBus\CommandBus;

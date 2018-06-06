@@ -4,6 +4,8 @@ namespace App\Domain\User\Event\UserWasCreated;
 
 use App\Domain\User\UserId;
 use App\Domain\User\ValueObject\Auth\Credentials;
+use App\Domain\User\ValueObject\Auth\HashedPassword;
+use App\Domain\User\ValueObject\Email;
 use App\Domain\User\ValueObject\Name;
 use Prooph\EventSourcing\AggregateChanged;
 
@@ -12,7 +14,8 @@ class UserWasCreatedEvent extends AggregateChanged
     private $credentials;
     private $name;
     protected $userId;
-    protected $messageName = 'user-was-created';
+
+//    protected $messageName = 'user-was-created-event';
 
     public static function withData(UserId $userId, Credentials $credentials, Name $name): UserWasCreatedEvent
     {
@@ -32,27 +35,37 @@ class UserWasCreatedEvent extends AggregateChanged
         return $event;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getCredentials(): Credentials
+    public function credentials(): Credentials
     {
+        if (null === $this->credentials) {
+            $this->credentials = new Credentials(Email::fromString($this->payload['credentials']['email']), HashedPassword::fromHash($this->payload['credentials']['password']));
+        }
+
         return $this->credentials;
     }
 
     /**
-     * @return mixed
+     * @return Name
      */
-    public function getName(): Name
+    public function name(): Name
     {
+        if (null === $this->name) {
+            list($firstname, $lastname) = explode(' ', $this->payload['name']);
+            $this->name = Name::fromString($firstname, $lastname);
+        }
+
         return $this->name;
     }
 
     /**
      * @return mixed
      */
-    public function getUserId(): UserId
+    public function userId(): UserId
     {
+        if (null === $this->userId) {
+            $this->userId = UserId::fromString($this->aggregateId());
+        }
+
         return $this->userId;
     }
 }

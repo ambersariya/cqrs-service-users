@@ -1,12 +1,21 @@
 prooph_event_store:
     stores:
         user_store:
-            event_store: 'app.event_store.default'
+            event_store: '@app.event_store.default'
             repositories:
                 App\Infrastructure\User\Repository\EventStoreUserCollection:
                     aggregate_type: App\Domain\User\User
                     aggregate_translator: Prooph\EventSourcing\EventStoreIntegration\AggregateTranslator
                     stream_name: 'user'
+
+    projection_managers:
+        user:
+            event_store:  '@app.event_store.default'
+            connection: '@doctrine.pdo.connection'
+            projections:
+                user_projection:
+                    read_model: App\Domain\User\Projection\User\UserReadModel
+                    projection: App\Domain\User\Projection\User\UserProjection
 
 services:
     _defaults:

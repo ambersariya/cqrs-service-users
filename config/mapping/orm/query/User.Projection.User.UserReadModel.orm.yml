@@ -1,0 +1,37 @@
+App\Domain\User\Projection\User\UserReadModel:
+    type: entity
+    id:
+        id:
+            type: uuid
+            generator:
+                strategy: CUSTOM
+            customIdGenerator:
+                class: Ramsey\Uuid\Doctrine\UuidGenerator
+    uniqueConstraints:
+        search_idx:
+            columns: [ email ]
+    fields:
+        firstName:
+            type: string
+            length: 50
+        lastName:
+            type: string
+            length: 50
+        email:
+            type: string
+            unique: true
+            length: 50
+            options:
+                fixed: true
+                comment: User's email address
+        password:
+            type: string
+        createdAt:
+            type: datetime
+            nullable: true
+        updatedAt:
+            type: datetime
+            nullable: true
+        deletedAt:
+            type: datetime
+            nullable: true

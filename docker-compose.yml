@@ -39,3 +39,11 @@ services:
     environment:
       - PROOPH_ENV=development
       - APP_ENV=dev
+
+  projection_user:
+    image: prooph/php:7.2-cli
+    volumes:
+      - .:/app
+    depends_on:
+      - mysql
+    command: php bin/console event-store:projection:run user_projection
