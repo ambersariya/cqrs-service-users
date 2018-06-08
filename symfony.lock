@@ -218,6 +218,9 @@
             "ref": "f7895777cd673fcefbc321a9063077a24e5df646"
         }
     },
+    "react/promise": {
+        "version": "v2.5.1"
+    },
     "roave/security-advisories": {
         "version": "dev-master"
     },

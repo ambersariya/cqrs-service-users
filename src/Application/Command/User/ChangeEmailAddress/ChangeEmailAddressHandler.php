@@ -24,7 +24,6 @@ class ChangeEmailAddressHandler
 
     public function __construct(UserEventRepositoryInterface $userRepository, LoggerInterface $logger)
     {
-
         $this->userRepository = $userRepository;
         $this->logger = $logger;
     }

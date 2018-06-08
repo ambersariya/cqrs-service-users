@@ -6,7 +6,6 @@ namespace App\Domain\User\Repository;
 
 
 use App\Domain\User\Projection\User\UserReadModel;
-use App\Domain\User\ValueObject\Email;
 
 interface UserReadModelRepositoryInterface
 {
@@ -17,4 +16,6 @@ interface UserReadModelRepositoryInterface
     public function deleteAll(): void;
 
     public function get(string $id): UserReadModel;
+
+    public function findAll(): array;
 }

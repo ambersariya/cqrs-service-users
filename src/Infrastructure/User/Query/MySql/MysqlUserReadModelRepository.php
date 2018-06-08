@@ -52,4 +52,9 @@ class MysqlUserReadModelRepository implements UserReadModelRepositoryInterface
                 'id' => $id,
             ]);
     }
+
+    public function findAll(): array
+    {
+        return $this->entityManager->getRepository(UserReadModel::class)->findAll();
+    }
 }

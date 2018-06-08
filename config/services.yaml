@@ -18,9 +18,14 @@ services:
         resource: '../src/*'
         exclude: '../src/{Entity,Migrations,Tests,Kernel.php,Infrastructure,Application}'
 
+    # Too much magic? - Read docs here: https://github.com/prooph/service-bus-symfony-bundle/blob/master/doc/routing.md
     App\Application\Command\:
         resource: '../src/Application/Command/**/*Handler.php'
         tags: [{ name: 'prooph_service_bus.user_command_bus.route_target', message_detection: true }]
+
+    App\Application\Query\:
+        resource: '../src/Application/Query/**/*Handler.php'
+        tags: [{ name: 'prooph_service_bus.read_users_query_bus.route_target', message_detection: true }]
 
     ### UI
     App\UI\Cli\Command\:
