@@ -2,7 +2,7 @@
 
 namespace spec\App\Domain\User\ValueObject\Auth;
 
-use App\Domain\User\ValueObject\Auth\HashedPassword;
+use App\Domain\ValueObject\Auth\HashedPassword;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 

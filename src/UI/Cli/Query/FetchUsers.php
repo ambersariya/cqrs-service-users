@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\UI\Cli\Query;
 
-use App\Application\Query\User\GetAllUsers\GetAllUsers;
-use App\Domain\User\Projection\User\UserReadModel;
+use App\Application\Query\GetAllUsers\GetAllUsers;
+use App\Domain\Projection\UserReadModel;
 use Prooph\ServiceBus\QueryBus;
 use React\Promise\Promise;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;

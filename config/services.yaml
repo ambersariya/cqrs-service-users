@@ -40,7 +40,7 @@ services:
     #     tags: [ 'controller.service_arguments' ]
 
     App\Infrastructure\User\Query\MySql\MysqlUserReadModelRepository: ~
-    App\Domain\User\Repository\UserReadModelRepositoryInterface: '@App\Infrastructure\User\Query\MySql\MysqlUserReadModelRepository'
+    App\Domain\Repository\UserReadModelRepositoryInterface: '@App\Infrastructure\User\Query\MySql\MysqlUserReadModelRepository'
 
     # Projections
     App\Domain\User\Projection\User\UserProjection: ~

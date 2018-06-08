@@ -2,10 +2,9 @@
 
 namespace App\Infrastructure\User\Repository;
 
-
-use App\Domain\User\Repository\UserEventRepositoryInterface;
-use App\Domain\User\User;
-use App\Domain\User\UserId;
+use App\Domain\Repository\UserEventRepositoryInterface;
+use App\Domain\User;
+use App\Domain\UserId;
 use Prooph\EventSourcing\Aggregate\AggregateRepository;
 
 class UserEventRepository extends AggregateRepository implements UserEventRepositoryInterface

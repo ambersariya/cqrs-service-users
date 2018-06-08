@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\UI\Cli\Command;
 
-use App\Application\Command\User\ChangeEmailAddress\ChangeEmailAddressCommand;
-use App\Domain\User\UserId;
-use App\Domain\User\ValueObject\Email;
+use App\Application\Command\ChangeEmailAddress\ChangeEmailAddressCommand;
+use App\Domain\UserId;
+use App\Domain\ValueObject\Email;
 use Prooph\ServiceBus\CommandBus;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
@@ -31,7 +31,7 @@ class ChangeEmailCommand extends ContainerAwareCommand
 //        $faker = \Faker\Factory::create();
         /** @var CommandBus $commandBus */
         $commandBus = $this->getContainer()->get('prooph_service_bus.user_command_bus');
-        $userId = '28f1efe6-36e7-4f26-8ea7-ed76550bd9b6';
+        $userId = 'b2ce9c68-1814-48c9-bd13-5293f3559f30';
         $command = ChangeEmailAddressCommand::with(
             UserId::fromString($userId),
             Email::fromString('bob.builder2@example.org')

@@ -4,7 +4,7 @@ prooph_event_store:
             event_store: '@app.event_store.default'
             repositories:
                 App\Infrastructure\User\Repository\UserEventRepository:
-                    aggregate_type: App\Domain\User\User
+                    aggregate_type: App\Domain\User
                     aggregate_translator: Prooph\EventSourcing\EventStoreIntegration\AggregateTranslator
                     stream_name: 'user'
 
@@ -14,8 +14,8 @@ prooph_event_store:
             connection: '@doctrine.pdo.connection'
             projections:
                 user_projection:
-                    read_model: App\Domain\User\Projection\User\UserReadModel
-                    projection: App\Domain\User\Projection\User\UserProjection
+                    read_model: App\Domain\Projection\UserReadModel
+                    projection: App\Domain\Projection\UserProjection
 
 services:
     _defaults:
@@ -38,4 +38,4 @@ services:
 
     Prooph\EventSourcing\EventStoreIntegration\AggregateTranslator: ~
 
-    App\Domain\User\Repository\UserEventRepositoryInterface: '@App\Infrastructure\User\Repository\UserEventRepository'
+    App\Domain\Repository\UserEventRepositoryInterface: '@App\Infrastructure\User\Repository\UserEventRepository'

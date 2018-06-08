@@ -4,12 +4,12 @@ namespace spec\App\Application\Command\User\SignUp;
 
 use App\Application\Command\User\SignUp\SignUpCommand;
 use App\Application\Command\User\SignUp\SignUpHandler;
-use App\Domain\User\Factory\UserFactory;
-use App\Domain\User\Repository\UserEventRepositoryInterface;
-use App\Domain\User\User;
-use App\Domain\User\UserId;
-use App\Domain\User\ValueObject\Auth\Credentials;
-use App\Domain\User\ValueObject\Name;
+use App\Domain\Factory\UserFactory;
+use App\Domain\Repository\UserEventRepositoryInterface;
+use App\Domain\User;
+use App\Domain\UserId;
+use App\Domain\ValueObject\Auth\Credentials;
+use App\Domain\ValueObject\Name;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 

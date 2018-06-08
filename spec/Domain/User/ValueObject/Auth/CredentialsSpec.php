@@ -2,9 +2,9 @@
 
 namespace spec\App\Domain\User\ValueObject\Auth;
 
-use App\Domain\User\ValueObject\Auth\Credentials;
-use App\Domain\User\ValueObject\Auth\HashedPassword;
-use App\Domain\User\ValueObject\Email;
+use App\Domain\ValueObject\Auth\Credentials;
+use App\Domain\ValueObject\Auth\HashedPassword;
+use App\Domain\ValueObject\Email;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\UI\Cli\Command;
 
-use App\Application\Command\User\SignUp\SignUpCommand as CreateUser;
-use App\Domain\User\UserId;
+use App\Application\Command\SignUp\SignUpCommand as CreateUser;
+use App\Domain\UserId;
 use Prooph\ServiceBus\CommandBus;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;

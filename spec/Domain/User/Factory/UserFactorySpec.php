@@ -2,15 +2,15 @@
 
 namespace spec\App\Domain\User\Factory;
 
-use App\Domain\User\Exception\UserAlreadyExistsException;
-use App\Domain\User\Factory\UserFactory;
-use App\Domain\User\Repository\UserEventRepositoryInterface;
-use App\Domain\User\User;
-use App\Domain\User\UserId;
-use App\Domain\User\ValueObject\Auth\Credentials;
-use App\Domain\User\ValueObject\Auth\HashedPassword;
-use App\Domain\User\ValueObject\Email;
-use App\Domain\User\ValueObject\Name;
+use App\Domain\Exception\UserAlreadyExistsException;
+use App\Domain\Factory\UserFactory;
+use App\Domain\Repository\UserEventRepositoryInterface;
+use App\Domain\User;
+use App\Domain\UserId;
+use App\Domain\ValueObject\Auth\Credentials;
+use App\Domain\ValueObject\Auth\HashedPassword;
+use App\Domain\ValueObject\Email;
+use App\Domain\ValueObject\Name;
 use PhpSpec\ObjectBehavior;
 
 class UserFactorySpec extends ObjectBehavior

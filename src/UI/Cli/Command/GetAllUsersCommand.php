@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\UI\Cli\Command;
 
-
 use Prooph\EventStore\Projection\ProjectionManager;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;

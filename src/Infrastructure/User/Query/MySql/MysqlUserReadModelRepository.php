@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\User\Query\MySql;
 
-use App\Domain\User\Projection\User\UserReadModel;
-use App\Domain\User\Repository\UserReadModelRepositoryInterface;
-use App\Domain\User\ValueObject\Email;
+use App\Domain\Projection\UserReadModel;
+use App\Domain\Repository\UserReadModelRepositoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 

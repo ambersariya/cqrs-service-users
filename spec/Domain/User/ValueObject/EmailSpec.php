@@ -2,7 +2,7 @@
 
 namespace spec\App\Domain\User\ValueObject;
 
-use App\Domain\User\ValueObject\Email;
+use App\Domain\ValueObject\Email;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 

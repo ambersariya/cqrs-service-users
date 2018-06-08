@@ -2,12 +2,12 @@
 
 namespace spec\App\Domain\User;
 
-use App\Domain\User\User;
-use App\Domain\User\UserId;
-use App\Domain\User\ValueObject\Auth\Credentials;
-use App\Domain\User\ValueObject\Auth\HashedPassword;
-use App\Domain\User\ValueObject\Email;
-use App\Domain\User\ValueObject\Name;
+use App\Domain\User;
+use App\Domain\UserId;
+use App\Domain\ValueObject\Auth\Credentials;
+use App\Domain\ValueObject\Auth\HashedPassword;
+use App\Domain\ValueObject\Email;
+use App\Domain\ValueObject\Name;
 use PhpSpec\ObjectBehavior;
 
 class UserSpec extends ObjectBehavior

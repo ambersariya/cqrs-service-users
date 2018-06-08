@@ -3,7 +3,7 @@
 namespace spec\App\Application\Command\User\SignUp;
 
 use App\Application\Command\User\SignUp\SignUpCommand;
-use App\Domain\User\UserId;
+use App\Domain\UserId;
 use PhpSpec\ObjectBehavior;
 use Ramsey\Uuid\UuidInterface;
 

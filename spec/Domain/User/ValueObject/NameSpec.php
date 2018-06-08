@@ -2,7 +2,7 @@
 
 namespace spec\App\Domain\User\ValueObject;
 
-use App\Domain\User\ValueObject\Name;
+use App\Domain\ValueObject\Name;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
