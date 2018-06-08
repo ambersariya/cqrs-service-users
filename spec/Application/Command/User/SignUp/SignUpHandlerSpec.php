@@ -5,7 +5,7 @@ namespace spec\App\Application\Command\User\SignUp;
 use App\Application\Command\User\SignUp\SignUpCommand;
 use App\Application\Command\User\SignUp\SignUpHandler;
 use App\Domain\User\Factory\UserFactory;
-use App\Domain\User\Repository\UserRepositoryInterface;
+use App\Domain\User\Repository\UserEventRepositoryInterface;
 use App\Domain\User\User;
 use App\Domain\User\UserId;
 use App\Domain\User\ValueObject\Auth\Credentials;
@@ -21,14 +21,14 @@ class SignUpHandlerSpec extends ObjectBehavior
     }
 
     function let(
-        UserRepositoryInterface $userRepository,
+        UserEventRepositoryInterface $userRepository,
         UserFactory $userFactory
     ) {
         $this->beConstructedWith($userRepository, $userFactory);
     }
 
     public function it_should_handle_user_signup_command_on_invocation(
-        UserRepositoryInterface $userRepository,
+        UserEventRepositoryInterface $userRepository,
         UserFactory $userFactory,
         User $user
     ) {

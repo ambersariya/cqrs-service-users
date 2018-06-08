@@ -2,9 +2,12 @@
 
 namespace App\Domain\User;
 
+use App\Domain\User\Event\ChangedEmailAddress\ChangedEmailAddressEvent;
 use App\Domain\User\Event\UserWasCreated\UserWasCreatedEvent;
 use App\Domain\User\ValueObject\Auth\Credentials;
+use App\Domain\User\ValueObject\Email;
 use App\Domain\User\ValueObject\Name;
+use const Fpp\dump;
 use Prooph\EventSourcing\AggregateChanged;
 use Prooph\EventSourcing\AggregateRoot;
 
@@ -14,7 +17,13 @@ class User extends AggregateRoot
      * @var UserId
      */
     public $userId;
+    /**
+     * @var Credentials
+     */
     public $credentials;
+    /**
+     * @var Name
+     */
     public $name;
 
     public static function create(UserId $userId, Credentials $credentials, Name $name): self
@@ -30,6 +39,26 @@ class User extends AggregateRoot
         $this->userId = $event->userId();
         $this->credentials = $event->credentials();
         $this->name = $event->name();
+    }
+
+    public function changeCredentials(UserId $userId, Credentials $credentials): self
+    {
+        $this->recordThat(ChangedEmailAddressEvent::with($userId, $credentials));
+
+        return $this;
+    }
+
+//    public static function changeEmail(UserId $userId, Email $newEmail): self
+//    {
+//        $user = new self();
+//        $user->recordThat(ChangedEmailAddressEvent::with($userId, $newEmail));
+//
+//        return $user;
+//    }
+
+    protected function whenChangedEmailAddress(ChangedEmailAddressEvent $event): void
+    {
+        $this->credentials = $event->credentials();
     }
 
     protected function aggregateId(): string

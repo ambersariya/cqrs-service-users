@@ -10,3 +10,4 @@ prooph_service_bus:
                 type: 'prooph_service_bus.event_bus_router'
                 routes:
                     App\Domain\User\Event\UserWasCreated\UserWasCreatedEvent: [ 'App\Domain\User\Event\UserWasCreated\UserWasCreatedEventHandler' ]
+                    App\Domain\User\Event\ChangedEmailAddress\ChangedEmailAddressEvent: [ 'App\Domain\User\Event\ChangedEmailAddress\ChangedEmailAddressEventHandler' ]

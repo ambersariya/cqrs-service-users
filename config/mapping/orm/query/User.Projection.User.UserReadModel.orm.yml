@@ -3,10 +3,6 @@ App\Domain\User\Projection\User\UserReadModel:
     id:
         id:
             type: uuid
-            generator:
-                strategy: CUSTOM
-            customIdGenerator:
-                class: Ramsey\Uuid\Doctrine\UuidGenerator
     uniqueConstraints:
         search_idx:
             columns: [ email ]

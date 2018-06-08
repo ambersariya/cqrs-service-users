@@ -4,7 +4,7 @@ namespace spec\App\Domain\User\Factory;
 
 use App\Domain\User\Exception\UserAlreadyExistsException;
 use App\Domain\User\Factory\UserFactory;
-use App\Domain\User\Repository\UserCollectionInterface;
+use App\Domain\User\Repository\UserEventRepositoryInterface;
 use App\Domain\User\User;
 use App\Domain\User\UserId;
 use App\Domain\User\ValueObject\Auth\Credentials;
@@ -15,7 +15,7 @@ use PhpSpec\ObjectBehavior;
 
 class UserFactorySpec extends ObjectBehavior
 {
-    function let(UserCollectionInterface $userCollection)
+    function let(UserEventRepositoryInterface $userCollection)
     {
         $this->beConstructedWith($userCollection);
     }
@@ -25,7 +25,7 @@ class UserFactorySpec extends ObjectBehavior
         $this->shouldHaveType(UserFactory::class);
     }
 
-    function it_should_return_user_object(UserCollectionInterface $userCollection)
+    function it_should_return_user_object(UserEventRepositoryInterface $userCollection)
     {
         $userId = UserId::fromString('cd480598-489a-4255-953d-925493b6c9f3');
         $credentials = new Credentials(Email::fromString('test@bob.com'), HashedPassword::encode('bob.com'));
@@ -38,7 +38,7 @@ class UserFactorySpec extends ObjectBehavior
     function it_should_throw_exception_if_user_already_exists(
         UserId $userId,
         Name $name,
-        UserCollectionInterface $userCollection
+        UserEventRepositoryInterface $userCollection
     ) {
         $credentials = new Credentials(Email::fromString('test@bob.com'), HashedPassword::encode('bob.com'));
 

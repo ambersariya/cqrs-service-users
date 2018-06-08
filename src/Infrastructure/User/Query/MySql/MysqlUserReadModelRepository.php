@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\User\Query\MySql;
 
-use App\Domain\User\Repository\UserCollectionInterface;
-use App\Domain\User\User;
-use App\Domain\User\UserId;
+use App\Domain\User\Projection\User\UserReadModel;
+use App\Domain\User\Repository\UserReadModelRepositoryInterface;
 use App\Domain\User\ValueObject\Email;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 
-class MysqlUserReadModelRepository implements UserCollectionInterface
+class MysqlUserReadModelRepository implements UserReadModelRepositoryInterface
 {
     /** @var EntityRepository */
     protected $repository;
@@ -25,40 +24,32 @@ class MysqlUserReadModelRepository implements UserCollectionInterface
         $this->entityManager = $entityManager;
     }
 
-    public function get(UserId $userId): ?User
+    public function existsEmail(string $email): bool
     {
-        return $this->getAggregateRoot($userId->toString());
+        $user = $this->entityManager->getRepository(UserReadModel::class)->findOneBy([
+            'email' => $email,
+        ]);
+
+        return $user instanceof UserReadModel;
     }
 
-    public function existsEmail(Email $email): bool
-    {
-        return false;
-    }
-
-    public function register($model): void
-    {
-        $this->entityManager->persist($model);
-        $this->apply();
-    }
-
-    public function apply(): void
-    {
-        $this->entityManager->flush();
-    }
-
-    public function findAll(): array
-    {
-        return $this->repository->findAll();
-    }
 
     public function deleteAll(): void
     {
         // TODO: Implement deleteAll() method.
     }
 
-    public function save($obj): void
+    public function save(UserReadModel $obj): void
     {
         $this->entityManager->persist($obj);
-        $this->apply();
+        $this->entityManager->flush();
+    }
+
+    public function get(string $id): UserReadModel
+    {
+        return $this->entityManager->getRepository(UserReadModel::class)
+            ->findOneBy([
+                'id' => $id,
+            ]);
     }
 }

@@ -3,7 +3,7 @@ prooph_event_store:
         user_store:
             event_store: '@app.event_store.default'
             repositories:
-                App\Infrastructure\User\Repository\EventStoreUserCollection:
+                App\Infrastructure\User\Repository\UserEventRepository:
                     aggregate_type: App\Domain\User\User
                     aggregate_translator: Prooph\EventSourcing\EventStoreIntegration\AggregateTranslator
                     stream_name: 'user'
@@ -38,4 +38,4 @@ services:
 
     Prooph\EventSourcing\EventStoreIntegration\AggregateTranslator: ~
 
-    App\Domain\User\Repository\UserRepositoryInterface: '@App\Infrastructure\User\Repository\EventStoreUserCollection'
+    App\Domain\User\Repository\UserEventRepositoryInterface: '@App\Infrastructure\User\Repository\UserEventRepository'

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Domain\User\Projection\User;
 
-use App\Domain\User\Repository\UserCollectionInterface;
-use App\Domain\User\Repository\UserRepositoryInterface;
+
+use App\Domain\User\Repository\UserReadModelRepositoryInterface;
 use Prooph\EventStore\Projection\AbstractReadModel;
 
 class UserReadModel extends AbstractReadModel
@@ -19,17 +19,14 @@ class UserReadModel extends AbstractReadModel
     public $updatedAt;
     public $deletedAt;
     /**
-     * @var UserRepositoryInterface
+     * @var UserReadModelRepositoryInterface
      */
     public $userRepository;
-    /**
-     * @var UserCollectionInterface
-     */
-    public $userCollection;
 
-    public function __construct(UserCollectionInterface $userCollection)
+
+    public function __construct(UserReadModelRepositoryInterface $userCollection)
     {
-        $this->userCollection = $userCollection;
+        $this->userRepository = $userCollection;
     }
 
     public function init(): void
@@ -45,7 +42,7 @@ class UserReadModel extends AbstractReadModel
     public function reset(): void
     {
         // TODO: Implement reset() method.
-        $this->userCollection->deleteAll();
+        $this->userRepository->deleteAll();
     }
 
     public function delete(): void
@@ -55,6 +52,7 @@ class UserReadModel extends AbstractReadModel
 
     /**
      * @TODO: Refactor this!
+     *
      * @param $data
      *
      * @throws \Exception
@@ -71,6 +69,15 @@ class UserReadModel extends AbstractReadModel
         $user->createdAt = new \DateTimeImmutable();
         $user->updatedAt = new \DateTimeImmutable();
 
-        $this->userCollection->save($user);
+        $this->userRepository->save($user);
+    }
+
+    public function changeEmail(string $id, string $email)
+    {
+        $user = $this->userRepository->get($id);
+        $user->email = $email;
+        $user->updatedAt = new \DateTimeImmutable();
+
+        $this->userRepository->save($user);
     }
 }

@@ -16,7 +16,7 @@ class SignUpCommand extends Command implements PayloadConstructable
 {
     use PayloadTrait;
 
-    public static function withData(string $userId, string $email, string $password, string $firstname, string $lastname): SignUpCommand
+    public static function with(string $userId, string $email, string $password, string $firstname, string $lastname): SignUpCommand
     {
         return new self([
             'user_id' => $userId,

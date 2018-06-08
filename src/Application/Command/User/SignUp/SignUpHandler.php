@@ -3,7 +3,7 @@
 namespace App\Application\Command\User\SignUp;
 
 use App\Domain\User\Factory\UserFactory;
-use App\Domain\User\Repository\UserRepositoryInterface;
+use App\Domain\User\Repository\UserEventRepositoryInterface;
 use Psr\Log\LoggerInterface;
 
 class SignUpHandler
@@ -13,7 +13,7 @@ class SignUpHandler
      */
     public $logger;
     /**
-     * @var UserRepositoryInterface
+     * @var UserEventRepositoryInterface
      */
     private $userRepository;
     /**
@@ -21,7 +21,7 @@ class SignUpHandler
      */
     private $userFactory;
 
-    public function __construct(UserRepositoryInterface $userRepository, UserFactory $userFactory, LoggerInterface $logger)
+    public function __construct(UserEventRepositoryInterface $userRepository, UserFactory $userFactory, LoggerInterface $logger)
     {
         $this->userRepository = $userRepository;
         $this->userFactory = $userFactory;
@@ -30,7 +30,6 @@ class SignUpHandler
 
     public function __invoke(SignUpCommand $signUpCommand): void
     {
-        $this->logger->debug($signUpCommand->messageName() .' ---->>>>');
         $aggregateRoot = $this->userFactory->create($signUpCommand->userId(), $signUpCommand->credentials(), $signUpCommand->name());
         $this->userRepository->store($aggregateRoot);
     }
