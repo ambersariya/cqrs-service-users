@@ -37,9 +37,7 @@ class ChangeEmailAddressHandler
         if (!$user) {
             throw new Exception('User not found');
         }
-        dump('handler' , $user );
-//        $user->credentials = New Credentials($changeEmailAddressCommand->email(), $user->credentials->hashedPassword());
-//        User::changeEmail($changeEmailAddressCommand->userId(), $changeEmailAddressCommand->email());
+
         $user->changeCredentials(
             $changeEmailAddressCommand->userId(),
             New Credentials($changeEmailAddressCommand->email(), $user->credentials->hashedPassword())
