@@ -1,3 +1,7 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+
+users_get_all:
+    path: /users
+    controller: App\UI\Http\Rest\Controller\UsersController::allUsersAction
