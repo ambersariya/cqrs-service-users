@@ -1,0 +1,14 @@
+App\Domain\Projection\UserReadModel:
+    exclusion_policy: ALL
+    properties:
+        id:
+            type: uuid
+            enabled: true
+            expose: true
+#
+#        email:
+#            type: string
+#            enabled: true
+#        password:
+#            type: string
+#            enabled: false

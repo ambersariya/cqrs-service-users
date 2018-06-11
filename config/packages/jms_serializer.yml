@@ -1,3 +1,9 @@
+services:
+    mhujer.jms_serializer.uuid.uuid_serializer_handler:
+        class: Mhujer\JmsSerializer\Uuid\UuidSerializerHandler
+        tags:
+            - { name: jms_serializer.subscribing_handler }
+
 jms_serializer:
     visitors:
         xml:
@@ -6,6 +12,13 @@ jms_serializer:
         datetime:
             default_format: "Y-m-d\\TH:i:sP" # ATOM
             default_timezone: "UTC" # defaults to whatever timezone set in php.ini or via date_default_timezone_set
+    metadata:
+        auto_detection: true
+        directories:
+            configuration-database:
+                namespace_prefix: "App\\Domain"
+                path: "%kernel.root_dir%/Resources/serializer"
+
 #    metadata:
 #        auto_detection: false
 #        directories:

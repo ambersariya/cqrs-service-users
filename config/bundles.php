@@ -16,4 +16,5 @@ return [
     Prooph\Bundle\EventStore\ProophEventStoreBundle::class => ['all' => true],
     Prooph\Bundle\ServiceBus\ProophServiceBusBundle::class => ['all' => true],
     JMS\SerializerBundle\JMSSerializerBundle::class => ['all' => true],
+    Mhujer\JmsSerializer\Uuid\SymfonyBundle\MhujerJmsSerializerUuidBundle::class => ['all' => true]
 ];

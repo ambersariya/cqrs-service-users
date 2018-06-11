@@ -128,6 +128,12 @@
     "memio/validator": {
         "version": "v2.0.3"
     },
+    "mhujer/jms-serializer-uuid": {
+        "version": "2.0.0"
+    },
+    "mhujer/jms-serializer-uuid-bundle": {
+        "version": "3.0.1"
+    },
     "monolog/monolog": {
         "version": "1.23.0"
     },

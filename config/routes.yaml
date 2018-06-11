@@ -5,3 +5,15 @@
 users_get_all:
     path: /users
     controller: App\UI\Http\Rest\Controller\UsersController::allUsersAction
+    methods:    [GET, HEAD]
+
+users_create:
+    path: /users
+    controller: App\UI\Http\Rest\Controller\UsersController::newUserAction
+    methods:    [POST]
+
+users_update:
+    path: /users
+    controller: App\UI\Http\Rest\Controller\UsersController::updateUserAction
+    methods:    [PUT]
+
