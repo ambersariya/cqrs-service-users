@@ -1,7 +1,7 @@
 # users-service-prooph
 Prooph Event Sourcing Example
 
-```bash
+```shell
 # Bash
 
 $ git clone git@github.com:ambersariya/users-service-prooph.git
