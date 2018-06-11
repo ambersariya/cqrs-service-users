@@ -18,8 +18,8 @@ class ChangeEmailCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this->setName('app:change-email')
-            ->addArgument('id', InputArgument::REQUIRED, 'Add an id' )
-            ->addArgument('email', InputArgument::REQUIRED, 'Add an email' )
+            ->addArgument('id', InputArgument::REQUIRED, 'Add an id')
+            ->addArgument('email', InputArgument::REQUIRED, 'Add an email')
             ->setDescription('Signs a user up')
             ->setHelp('no help for you');
     }
@@ -36,7 +36,7 @@ class ChangeEmailCommand extends ContainerAwareCommand
         $email = $input->getArgument('email');
         $id = $input->getArgument('id');
 
-//        $faker = \Faker\Factory::create();
+        //        $faker = \Faker\Factory::create();
         /** @var CommandBus $commandBus */
         $commandBus = $this->getContainer()->get('prooph_service_bus.user_command_bus');
         $command = ChangeEmailAddressCommand::with(

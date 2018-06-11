@@ -2,48 +2,68 @@ version: '3'
 
 services:
 
-  mysql:
-    image: mysql:5.7
-    ports:
-      - 3306:3306
-    environment:
-      - MYSQL_ROOT_PASSWORD=dev
-      - MYSQL_USER=dev
-      - MYSQL_PASSWORD=dev
-      - MYSQL_DATABASE=users
-    volumes:
-      - ./vendor/prooph/pdo-event-store/scripts/mysql:/docker-entrypoint-initdb.d
+#    db_mysql:
+#        image: mysql:5.7
+#        ports:
+#            - 3306:3306
+#        environment:
+#            - MYSQL_ROOT_PASSWORD=dev
+#            - MYSQL_USER=dev
+#            - MYSQL_PASSWORD=dev
+#            - MYSQL_DATABASE=users
+#        volumes:
+#            - ./vendor/prooph/pdo-event-store/scripts/mysql:/docker-entrypoint-initdb.d
 
-  nginx:
-    image: prooph/nginx:www
-    ports:
-      - 8080:80
-      - 443:443
-      - 10081:10081
-      - 10082:10082
-    links:
-      - php:php
-    volumes:
-      - .:/var/www
+    db_postgres:
+        image: postgres:10.4
+        restart: always
+        ports:
+            - 5432:5432
+        environment:
+            POSTGRES_PASSWORD: dev
+            POSTGRES_USER: dev
+            POSTGRES_DB: users
+        volumes:
+            - ./vendor/prooph/pdo-event-store/scripts/postgres:/docker-entrypoint-initdb.d
+            - /srv/docker/postgresql:/var/lib/postgresql
 
-  php:
-    build:
-      context: .docker/php
-      dockerfile: Dockerfile.dev
-    env_file:
-      - ./.env
-    volumes:
-      - .:/var/www
-    depends_on:
-      - mysql
-    environment:
-      - PROOPH_ENV=development
-      - APP_ENV=dev
+    adminer:
+        image: adminer
+        restart: always
+        ports:
+            - 8888:8080
 
-  projection_user:
-    image: prooph/php:7.2-cli
-    volumes:
-      - .:/app
-    depends_on:
-      - mysql
-    command: php bin/console event-store:projection:run user_projection
+    nginx:
+        image: prooph/nginx:www
+        ports:
+            - 8080:80
+            - 443:443
+            - 10081:10081
+            - 10082:10082
+        links:
+            - php:php
+        volumes:
+            - .:/var/www
+
+    php:
+        build:
+            context: .docker/php
+            dockerfile: Dockerfile.dev
+        env_file:
+            - ./.env
+        volumes:
+            - .:/var/www
+        depends_on:
+            - db_postgres
+        environment:
+            - PROOPH_ENV=development
+            - APP_ENV=dev
+
+    projection_user:
+        image: prooph/php:7.2-cli
+        volumes:
+            - .:/app
+        depends_on:
+            - db_postgres
+        command: php bin/console event-store:projection:run user_projection
+

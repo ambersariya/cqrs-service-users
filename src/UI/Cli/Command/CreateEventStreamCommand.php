@@ -31,9 +31,9 @@ class CreateEventStreamCommand extends ContainerAwareCommand
             $output->writeln('<info>Event stream was created successfully.</info>');
 
         } catch (CommandDispatchException $ex) {
-            $output->writeln(sprintf('<error>%s</error>'), $ex->getPrevious()->getMessage());
+            $output->writeln(sprintf('<error>%s</error>', $ex->getPrevious()->getMessage()));
         } catch (\Throwable $error) {
-            $output->writeln(sprintf('<error>%s</error>'), $error->getMessage());
+            $output->writeln(sprintf('<error>%s</error>', $error->getMessage()));
         }
     }
 }
