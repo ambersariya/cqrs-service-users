@@ -1,0 +1,28 @@
+App\Domain\Projection\UserReadModel:
+    exclusion_policy: ALL
+    properties:
+        id:
+            type: uuid
+            expose: true
+            exclude: false
+        firstName:
+            expose: true
+        lastName:
+            expose: true
+        email:
+            expose: true
+        createdAt:
+            expose: true
+        updatedAt:
+            expose: true
+        stack:
+            expose: false
+            exclude: true
+
+    relations:
+        -
+            rel: self
+            href:
+                route: users_get_by_id
+                parameters:
+                    id: expr(object.id)

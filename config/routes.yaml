@@ -17,3 +17,7 @@ users_update:
     controller: App\UI\Http\Rest\Controller\UsersController::updateUserAction
     methods:    [PUT]
 
+users_get_by_id:
+    path: /users/{id}
+    controller: App\UI\Http\Rest\Controller\UsersController::updateUserAction
+    methods:    [GET]

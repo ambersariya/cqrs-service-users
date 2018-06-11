@@ -19,7 +19,7 @@ services:
             - "traefik.port=5432"
         volumes:
             - ./vendor/prooph/pdo-event-store/scripts/postgres:/docker-entrypoint-initdb.d
-            - /srv/docker/postgresql:/var/lib/postgresql
+            - ./data:/var/lib/postgresql
 
     nginx:
         image: prooph/nginx:www

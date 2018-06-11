@@ -320,6 +320,9 @@
     "symfony/event-dispatcher": {
         "version": "v4.0.11"
     },
+    "symfony/expression-language": {
+        "version": "v4.1.0"
+    },
     "symfony/filesystem": {
         "version": "v4.0.11"
     },
@@ -487,6 +490,12 @@
     },
     "webmozart/assert": {
         "version": "1.3.0"
+    },
+    "willdurand/hateoas": {
+        "version": "2.12.0"
+    },
+    "willdurand/hateoas-bundle": {
+        "version": "1.4.0"
     },
     "zendframework/zend-code": {
         "version": "3.3.0"

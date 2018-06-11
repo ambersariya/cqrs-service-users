@@ -34,12 +34,10 @@ class UsersController extends Controller
             echo $reason . PHP_EOL;
         });
 
+        $json = $this->container->get('jms_serializer')
+            ->serialize($response, 'json');
 
-        return new JsonResponse($response);
-//        $json = $this->container->get('jms_serializer')
-//            ->serialize($response, 'json');
-//
-//        return new JsonResponse($json, 200, [], true);
+        return new JsonResponse($json, JsonResponse::HTTP_OK, [], true);
     }
 
     public function newUserAction(Request $request)
