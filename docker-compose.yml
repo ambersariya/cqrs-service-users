@@ -2,18 +2,6 @@ version: '3'
 
 services:
 
-#    db_mysql:
-#        image: mysql:5.7
-#        ports:
-#            - 3306:3306
-#        environment:
-#            - MYSQL_ROOT_PASSWORD=dev
-#            - MYSQL_USER=dev
-#            - MYSQL_PASSWORD=dev
-#            - MYSQL_DATABASE=users
-#        volumes:
-#            - ./vendor/prooph/pdo-event-store/scripts/mysql:/docker-entrypoint-initdb.d
-
     db_postgres:
         image: postgres:10.4
         restart: always
@@ -23,23 +11,29 @@ services:
             POSTGRES_PASSWORD: dev
             POSTGRES_USER: dev
             POSTGRES_DB: users
+        networks:
+          - web
+          - backend
+        labels:
+            - "traefik.frontend.rule=Host:services-db.phishd.test"
+            - "traefik.port=5432"
         volumes:
             - ./vendor/prooph/pdo-event-store/scripts/postgres:/docker-entrypoint-initdb.d
             - /srv/docker/postgresql:/var/lib/postgresql
 
-    adminer:
-        image: adminer
-        restart: always
-        ports:
-            - 8888:8080
-
     nginx:
         image: prooph/nginx:www
         ports:
-            - 8080:80
-            - 443:443
             - 10081:10081
             - 10082:10082
+            - 80:80
+            - 443:443
+        networks:
+          - web
+          - backend
+        labels:
+            - "traefik.frontend.rule=Host:users-api.phishd.test"
+            - "traefik.port=80,443"
         links:
             - php:php
         volumes:
@@ -53,6 +47,8 @@ services:
             - ./.env
         volumes:
             - .:/var/www
+        networks:
+          - backend
         depends_on:
             - db_postgres
         environment:
@@ -65,5 +61,13 @@ services:
             - .:/app
         depends_on:
             - db_postgres
+        networks:
+          - backend
         command: php bin/console event-store:projection:run user_projection
 
+networks:
+    web:
+        external: true
+    backend:
+        driver: bridge
+        internal: true
