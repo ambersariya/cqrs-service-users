@@ -77,4 +77,17 @@ class UsersController extends Controller
 
         return new Response('', Response::HTTP_OK);
     }
+
+    public function meAction()
+    {
+        $json = $this->container->get('jms_serializer')
+            ->serialize($this->getUser(), 'json');
+
+        return new JsonResponse($json, JsonResponse::HTTP_OK, [], true);
+    }
+
+    public function getUserAction(string $id)
+    {
+        return new JsonResponse();
+    }
 }
