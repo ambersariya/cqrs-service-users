@@ -11,6 +11,7 @@
         "lexik/jwt-authentication-bundle": "^2.4",
         "mhujer/jms-serializer-uuid-bundle": "^3.0",
         "monolog/monolog": "^1.23",
+        "nelmio/cors-bundle": "^1.5",
         "prooph/event-sourcing": "^5.5",
         "prooph/event-store-bus-bridge": "^3.2",
         "prooph/event-store-http-middleware": "^0.2.0",
