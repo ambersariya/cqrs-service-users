@@ -10,8 +10,8 @@ $ docker-compose up -d
 
 
 $ docker-compose exec php sh
-$ bin/console event-store:event-stream:create
-$ bin/console doctrine:migrations:migrate
+$ docker-compose exec php bin/console event-store:event-stream:create
+$ docker-compose exec php bin/console doctrine:migrations:migrate --no-interaction
 
 ```
 
