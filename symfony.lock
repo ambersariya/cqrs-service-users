@@ -104,6 +104,15 @@
     "leanphp/phpspec-code-coverage": {
         "version": "v4.2.2"
     },
+    "lexik/jwt-authentication-bundle": {
+        "version": "2.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "2.3",
+            "ref": "a66e8a7b75a1825cf2414d5dd53c7ed38c8654d1"
+        }
+    },
     "marc-mabe/php-enum": {
         "version": "v3.0.1"
     },
@@ -136,6 +145,9 @@
     },
     "monolog/monolog": {
         "version": "1.23.0"
+    },
+    "namshi/jose": {
+        "version": "7.2.3"
     },
     "nikic/php-parser": {
         "version": "v4.0.1"

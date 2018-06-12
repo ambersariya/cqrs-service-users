@@ -11,29 +11,33 @@ services:
             POSTGRES_PASSWORD: dev
             POSTGRES_USER: dev
             POSTGRES_DB: users
-#        networks:
-#          - web
-#          - backend
+        networks:
+          - web
+          - backend
         labels:
             - "traefik.frontend.rule=Host:services-db.phishd.test"
             - "traefik.port=5432"
         volumes:
             - ./vendor/prooph/pdo-event-store/scripts/postgres:/docker-entrypoint-initdb.d
             - ./data:/var/lib/postgresql
+        healthcheck:
+            test: ["CMD", "curl", "-f", "http://localhost:5432"]
+            interval: 30s
+            timeout: 10s
+            retries: 5
 
     nginx:
         image: prooph/nginx:www
         ports:
             - 10081:10081
             - 10082:10082
-            - 8080:80
-            - 443:443
-#        networks:
-#          - web
-#          - backend
+        networks:
+          - web
+          - backend
         labels:
             - "traefik.frontend.rule=Host:users-api.phishd.test"
-            - "traefik.port=8080"
+            - "traefik.port=80"
+            - "traefik.docker.network=web"
         links:
             - php:php
         volumes:
@@ -44,16 +48,17 @@ services:
             context: .docker/php
             dockerfile: Dockerfile.dev
         env_file:
-            - ./.env
+            - .env
         volumes:
             - .:/var/www
-#        networks:
-#            - backend
+        networks:
+            - backend
         depends_on:
             - db_postgres
         environment:
             - PROOPH_ENV=development
             - APP_ENV=dev
+
 
     projection_user:
         image: prooph/php:7.2-cli
@@ -61,13 +66,14 @@ services:
             - .:/app
         depends_on:
             - db_postgres
-#        networks:
-#            - backend
+        networks:
+            - backend
         command: php bin/console event-store:projection:run user_projection
+        restart: on-failure # https://stackoverflow.com/a/41854997/890826
 
-#networks:
-#    web:
-#        external: true
-#    backend:
-#        driver: bridge
-#        internal: true
+networks:
+    web:
+        external: true
+    backend:
+        driver: bridge
+        internal: true

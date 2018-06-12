@@ -1,23 +1,28 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+index:
+    path: /
+    controller: App\UI\Http\Rest\Controller\DefaultController::indexAction
+    methods:    [GET, HEAD]
+
+api_login_check:
+    path: /api/login_check
 
 users_get_all:
-    path: /users
+    path: /api/users
     controller: App\UI\Http\Rest\Controller\UsersController::allUsersAction
     methods:    [GET, HEAD]
 
 users_create:
-    path: /users
+    path: /api/users
     controller: App\UI\Http\Rest\Controller\UsersController::newUserAction
     methods:    [POST]
 
 users_update:
-    path: /users
+    path: /api/users/{id}
     controller: App\UI\Http\Rest\Controller\UsersController::updateUserAction
     methods:    [PUT]
 
-users_get_by_id:
-    path: /users/{id}
-    controller: App\UI\Http\Rest\Controller\UsersController::updateUserAction
-    methods:    [GET]
+#users_get_by_id:
+#    path: /api/users/{id}
+#    controller: App\UI\Http\Rest\Controller\UsersController::updateUserAction
+#    methods:    [GET]
+

@@ -8,6 +8,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "jms/serializer-bundle": "^2.4",
+        "lexik/jwt-authentication-bundle": "^2.4",
         "mhujer/jms-serializer-uuid-bundle": "^3.0",
         "monolog/monolog": "^1.23",
         "prooph/event-sourcing": "^5.5",

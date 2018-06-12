@@ -32,12 +32,20 @@ class SignUpCommand extends ContainerAwareCommand
         /** @var CommandBus $commandBus */
         $commandBus = $this->getContainer()->get('prooph_service_bus.user_command_bus');
         $userId = UserId::generate();
+        $password = $faker->password(6);
+        $email = $faker->email;
+        $firstname = $faker->firstName;
+        $lastName = $faker->lastName;
+        $output->writeln(sprintf('<info>Email: %s</info>', $email));
+        $output->writeln(sprintf('<info>Plaintext Password: %s</info>', $password));
+        $output->writeln(sprintf('<info>First Name: %s</info>', $firstname));
+        $output->writeln(sprintf('<info>Last Name: %s</info>', $lastName));
         $command = CreateUser::with(
             $userId->toString(),
-            $faker->email,
-            $faker->password(6),
-            $faker->firstName,
-            $faker->lastName
+            $email,
+            $password,
+            $firstname,
+            $lastName
         );
 
         $commandBus->dispatch($command);
