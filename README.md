@@ -15,4 +15,10 @@ $ docker-compose exec php bin/console doctrine:migrations:migrate --no-interacti
 
 ```
 
+Enable JWT
 
+```shell
+# The following will grab passphrase from our .env variable
+$ openssl genrsa -passout env:JWT_PASSPHRASE -out config/jwt/private.pem -aes256 4096
+$ openssl rsa -pubout -in config/jwt/private.pem -out config/jwt/public.pem -passin env:JWT_PASSPHRASE
+```
