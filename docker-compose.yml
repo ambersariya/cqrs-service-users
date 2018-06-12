@@ -19,7 +19,7 @@ services:
             - "traefik.port=5432"
         volumes:
             - ./vendor/prooph/pdo-event-store/scripts/postgres:/docker-entrypoint-initdb.d
-            - ./data:/var/lib/postgresql
+            - ./var/data:/var/lib/postgresql
         healthcheck:
             test: ["CMD", "curl", "-f", "http://localhost:5432"]
             interval: 30s

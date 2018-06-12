@@ -12,12 +12,11 @@ jms_serializer:
         auto_detection: false
         directories:
             app-domain:
-                namespace_prefix: "App\\Domain"
+                namespace_prefix: 'App\Domain'
                 path: "%kernel.root_dir%/../config/serializer"
     property_naming:
         separator:  _
         lower_case: true
-
 
 bazinga_hateoas:
     metadata:
