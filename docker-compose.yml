@@ -1,4 +1,4 @@
-version: '3'
+version: '3.5'
 
 services:
 
@@ -15,7 +15,7 @@ services:
           - web
           - backend
         labels:
-            - "traefik.frontend.rule=Host:services-db.phishd.test"
+            - "traefik.frontend.rule=Host:${DB_HOSTNAME}"
             - "traefik.port=5432"
         volumes:
             - ./vendor/prooph/pdo-event-store/scripts/postgres:/docker-entrypoint-initdb.d
@@ -35,7 +35,7 @@ services:
           - web
           - backend
         labels:
-            - "traefik.frontend.rule=Host:users-api.phishd.test"
+            - "traefik.frontend.rule=Host:${API_HOSTNAME}"
             - "traefik.port=80"
             - "traefik.docker.network=web"
         links:
@@ -58,7 +58,6 @@ services:
         environment:
             - PROOPH_ENV=development
             - APP_ENV=dev
-
 
     projection_user:
         image: prooph/php:7.2-cli
