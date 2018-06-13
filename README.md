@@ -37,7 +37,7 @@ docker-compose exec php bin/console app:sign-up
 ### Register
 ```shell
 $ curl -X POST \
-  http://localhost/register \
+  http://[HOST NAME HERE]/register \
   -H 'Content-Type: application/json' \
       -d '{
       "first_name": "John",
@@ -53,7 +53,7 @@ $ curl -X POST \
 ### Login
 ```shell
 curl -X POST \
-  http://localhost/login_check \
+  http://[HOST NAME HERE]/login_check \
   -H 'Cache-Control: no-cache' \
   -H 'Content-Type: application/json' \
       -d '{
@@ -68,7 +68,7 @@ curl -X POST \
 
 ### Access protected route:
 ```shell
-$ curl -H "Authorization: Bearer [TOKEN]" http://localhost/api/me
+$ curl -H "Authorization: Bearer [TOKEN]" http://[HOST NAME HERE]/api/me
 -> {
         "id": "fd9999ff-0f13-4c52-a973-915217d591d1",
         "first_name": "John",
