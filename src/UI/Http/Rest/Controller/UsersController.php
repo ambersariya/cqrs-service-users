@@ -7,12 +7,15 @@ namespace App\UI\Http\Rest\Controller;
 use App\Application\Command\ChangeEmailAddress\ChangeEmailAddressCommand;
 use App\Application\Command\SignUp\SignUpCommand;
 use App\Application\Query\GetAllUsers\GetAllUsers;
+use App\Domain\Exception\UserAlreadyExistsException;
 use App\Domain\Projection\UserReadModel;
 use App\Domain\UserId;
 use App\Domain\ValueObject\Email;
 use App\UI\Http\Rest\Exception\ApiProblem;
 use App\UI\Http\Rest\Exception\ApiProblemException;
+use Prooph\EventStore\Exception\ConcurrencyException;
 use Prooph\ServiceBus\CommandBus;
+use Prooph\ServiceBus\Exception\CommandDispatchException;
 use Prooph\ServiceBus\QueryBus;
 use React\Promise\Promise;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -51,50 +54,46 @@ class UsersController extends Controller
             throw ApiProblemException::with(new ApiProblem(400, 'JSON payload is invalid'));
         }
 
-//        try {
-        /** @var CommandBus $commandBus */
-        $commandBus = $this->container->get('prooph_service_bus.user_command_bus');
-        $command = SignUpCommand::with(
-            $data['id'],
-            $data['email'],
-            $data['password'],
-            $data['first_name'],
-            $data['last_name']
-        );
+        try {
+            /** @var CommandBus $commandBus */
+            $commandBus = $this->container->get('prooph_service_bus.user_command_bus');
+            $command = SignUpCommand::with(
+                $data['id'],
+                $data['email'],
+                $data['password'],
+                $data['first_name'],
+                $data['last_name']
+            );
 
-        $commandBus->dispatch($command);
+            $commandBus->dispatch($command);
 
-        return new JsonResponse(null, Response::HTTP_CREATED);
+            return new JsonResponse(null, Response::HTTP_CREATED);
 
-//        } catch (CommandDispatchException $exception) {
-//
-//            // TODO: find an elegant way of handling errors
-//            if ($exception->getPrevious() instanceof ConcurrencyException) {
-//                return new JsonResponse([
-//                    'errors' => [
-//                        ['message' => sprintf('User already exists with id %s', $data['id'])],
-//                    ],
-//                ], JsonResponse::HTTP_CONFLICT);
-//            }
-//
-//            if ($exception->getPrevious() instanceof UserAlreadyExistsException) {
-//                return new JsonResponse([
-//                    'errors' => [
-//                        ['message' => sprintf('User already exists with id %s', $data['id'])],
-//                    ],
-//                ], JsonResponse::HTTP_CONFLICT);
-//            }
-//
-//        } catch (\Exception $exception) {
-//            return new JsonResponse($exception->getMessage(), JsonResponse::HTTP_INTERNAL_SERVER_ERROR);
-//        }
+        } catch (CommandDispatchException $exception) {
+
+            if ($exception->getPrevious() instanceof ConcurrencyException) {
+                $message = sprintf('User already exists with id %s', $data['id']);
+            }
+
+            if ($exception->getPrevious() instanceof UserAlreadyExistsException) {
+                $message = sprintf('User already exists with email %s', $data['id']);
+            }
+
+            throw ApiProblemException::with(new ApiProblem(JsonResponse::HTTP_CONFLICT, $message));
+
+        } catch (\Exception $exception) {
+            throw ApiProblemException::with(new ApiProblem(JsonResponse::HTTP_INTERNAL_SERVER_ERROR, $exception->getMessage()));
+        }
     }
-
 
     public function updateUserAction(Request $request)
     {
         $json = $request->getContent();
         $data = json_decode($json, true);
+
+        if ($data === null) {
+            throw ApiProblemException::with(new ApiProblem(400, 'JSON payload is invalid'));
+        }
 
         /** @var CommandBus $commandBus */
         $commandBus = $this->container->get('prooph_service_bus.user_command_bus');
@@ -105,7 +104,7 @@ class UsersController extends Controller
 
         $commandBus->dispatch($command);
 
-        return new Response('', Response::HTTP_OK);
+        return new JsonResponse(null);
     }
 
     public function meAction()
@@ -113,7 +112,7 @@ class UsersController extends Controller
         $json = $this->container->get('jms_serializer')
             ->serialize($this->getUser(), 'json');
 
-        return new JsonResponse($json, JsonResponse::HTTP_OK, [], true);
+        return new JsonResponse($json, JsonResponse::HTTP_OK);
     }
 
     public function getUserAction(string $id)
