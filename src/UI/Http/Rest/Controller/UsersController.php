@@ -67,7 +67,7 @@ class UsersController extends Controller
 
             $commandBus->dispatch($command);
 
-            return new JsonResponse(null, Response::HTTP_CREATED);
+            return new Response(null, Response::HTTP_CREATED);
 
         } catch (CommandDispatchException $exception) {
 
