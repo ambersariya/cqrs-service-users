@@ -20,14 +20,13 @@ $ docker-compose exec php bin/console event-store:event-stream:create
 $ docker-compose exec php bin/console doctrine:migrations:migrate --no-interaction
 
 ```
-Note: Run the following after `docker-compose exec php sh`
 
 ### Enable JWT
 
 ```shell
 # The following will grab passphrase from our .env variable
-$ openssl genrsa -passout env:JWT_PASSPHRASE -out config/jwt/private.pem -aes256 4096
-$ openssl rsa -pubout -in config/jwt/private.pem -out config/jwt/public.pem -passin env:JWT_PASSPHRASE
+$ docker-compose exec php openssl genrsa -passout env:JWT_PASSPHRASE -out config/jwt/private.pem -aes256 4096
+$ docker-compose exec php openssl rsa -pubout -in config/jwt/private.pem -out config/jwt/public.pem -passin env:JWT_PASSPHRASE
 ```
 
 ### Register
