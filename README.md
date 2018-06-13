@@ -29,6 +29,11 @@ $ docker-compose exec php openssl genrsa -passout env:JWT_PASSPHRASE -out config
 $ docker-compose exec php openssl rsa -pubout -in config/jwt/private.pem -out config/jwt/public.pem -passin env:JWT_PASSPHRASE
 ```
 
+### Create User (Cli)
+```shell
+docker-compose exec php bin/console app:sign-up
+```
+
 ### Register
 ```shell
 $ curl -X POST \
