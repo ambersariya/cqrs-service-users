@@ -20,20 +20,24 @@ $ docker-compose exec php bin/console event-store:event-stream:create
 $ docker-compose exec php bin/console doctrine:migrations:migrate --no-interaction
 
 ```
-Note: Run the following after `docker-compose exec php sh`
 
 ### Enable JWT
 
 ```shell
 # The following will grab passphrase from our .env variable
-$ openssl genrsa -passout env:JWT_PASSPHRASE -out config/jwt/private.pem -aes256 4096
-$ openssl rsa -pubout -in config/jwt/private.pem -out config/jwt/public.pem -passin env:JWT_PASSPHRASE
+$ docker-compose exec php openssl genrsa -passout env:JWT_PASSPHRASE -out config/jwt/private.pem -aes256 4096
+$ docker-compose exec php openssl rsa -pubout -in config/jwt/private.pem -out config/jwt/public.pem -passin env:JWT_PASSPHRASE
+```
+
+### Create User (Cli)
+```shell
+docker-compose exec php bin/console app:sign-up
 ```
 
 ### Register
 ```shell
 $ curl -X POST \
-  http://localhost:8080/register \
+  http://[HOST NAME HERE]/register \
   -H 'Content-Type: application/json' \
       -d '{
       "first_name": "John",
@@ -49,7 +53,7 @@ $ curl -X POST \
 ### Login
 ```shell
 curl -X POST \
-  http://localhost:8000/login_check \
+  http://[HOST NAME HERE]/login_check \
   -H 'Cache-Control: no-cache' \
   -H 'Content-Type: application/json' \
       -d '{
@@ -64,7 +68,7 @@ curl -X POST \
 
 ### Access protected route:
 ```shell
-$ curl -H "Authorization: Bearer [TOKEN]" http://localhost:8000/api/me
+$ curl -H "Authorization: Bearer [TOKEN]" http://[HOST NAME HERE]/api/me
 -> {
         "id": "fd9999ff-0f13-4c52-a973-915217d591d1",
         "first_name": "John",
