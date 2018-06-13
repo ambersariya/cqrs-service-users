@@ -10,6 +10,8 @@ use App\Application\Query\GetAllUsers\GetAllUsers;
 use App\Domain\Projection\UserReadModel;
 use App\Domain\UserId;
 use App\Domain\ValueObject\Email;
+use App\UI\Http\Rest\Exception\ApiProblem;
+use App\UI\Http\Rest\Exception\ApiProblemException;
 use Prooph\ServiceBus\CommandBus;
 use Prooph\ServiceBus\QueryBus;
 use React\Promise\Promise;
@@ -45,6 +47,11 @@ class UsersController extends Controller
         $json = $request->getContent();
         $data = json_decode($json, true);
 
+        if ($data === null) {
+            throw ApiProblemException::with(new ApiProblem(400, 'JSON payload is invalid'));
+        }
+
+//        try {
         /** @var CommandBus $commandBus */
         $commandBus = $this->container->get('prooph_service_bus.user_command_bus');
         $command = SignUpCommand::with(
@@ -57,7 +64,30 @@ class UsersController extends Controller
 
         $commandBus->dispatch($command);
 
-        return new Response('', Response::HTTP_CREATED);
+        return new JsonResponse(null, Response::HTTP_CREATED);
+
+//        } catch (CommandDispatchException $exception) {
+//
+//            // TODO: find an elegant way of handling errors
+//            if ($exception->getPrevious() instanceof ConcurrencyException) {
+//                return new JsonResponse([
+//                    'errors' => [
+//                        ['message' => sprintf('User already exists with id %s', $data['id'])],
+//                    ],
+//                ], JsonResponse::HTTP_CONFLICT);
+//            }
+//
+//            if ($exception->getPrevious() instanceof UserAlreadyExistsException) {
+//                return new JsonResponse([
+//                    'errors' => [
+//                        ['message' => sprintf('User already exists with id %s', $data['id'])],
+//                    ],
+//                ], JsonResponse::HTTP_CONFLICT);
+//            }
+//
+//        } catch (\Exception $exception) {
+//            return new JsonResponse($exception->getMessage(), JsonResponse::HTTP_INTERNAL_SERVER_ERROR);
+//        }
     }
 
 

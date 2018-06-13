@@ -49,6 +49,7 @@ class SignUpCommand extends ContainerAwareCommand
         );
 
         $commandBus->dispatch($command);
-        $output->writeln('Whoa!');
+
+        $output->writeln('OK');
     }
 }
