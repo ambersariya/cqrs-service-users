@@ -3211,16 +3211,16 @@
         },
         {
             "name": "react/promise",
-            "version": "v2.6.0",
+            "version": "v2.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/reactphp/promise.git",
-                "reference": "5e60e5596a5422287f9d2205f405bef2ae0cef4b"
+                "reference": "f4edc2581617431aea50430749db55cc3fc031b3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/reactphp/promise/zipball/5e60e5596a5422287f9d2205f405bef2ae0cef4b",
-                "reference": "5e60e5596a5422287f9d2205f405bef2ae0cef4b",
+                "url": "https://api.github.com/repos/reactphp/promise/zipball/f4edc2581617431aea50430749db55cc3fc031b3",
+                "reference": "f4edc2581617431aea50430749db55cc3fc031b3",
                 "shasum": ""
             },
             "require": {
@@ -3253,7 +3253,7 @@
                 "promise",
                 "promises"
             ],
-            "time": "2018-06-11T11:05:43+00:00"
+            "time": "2018-06-13T15:59:06+00:00"
         },
         {
             "name": "roave/security-advisories",
@@ -6607,16 +6607,16 @@
         },
         {
             "name": "memio/model",
-            "version": "2.0.3",
+            "version": "2.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/memio/model.git",
-                "reference": "c951cf42e03e7046b618f97e277edcdf9043fd40"
+                "reference": "1e4609e0df347e1b9ed0f12eb4db82f378a6c049"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/memio/model/zipball/c951cf42e03e7046b618f97e277edcdf9043fd40",
-                "reference": "c951cf42e03e7046b618f97e277edcdf9043fd40",
+                "url": "https://api.github.com/repos/memio/model/zipball/1e4609e0df347e1b9ed0f12eb4db82f378a6c049",
+                "reference": "1e4609e0df347e1b9ed0f12eb4db82f378a6c049",
                 "shasum": ""
             },
             "require": {
@@ -6656,7 +6656,7 @@
                 "generator",
                 "php"
             ],
-            "time": "2018-03-02T15:05:48+00:00"
+            "time": "2018-06-13T10:27:07+00:00"
         },
         {
             "name": "memio/pretty-printer",
@@ -6709,16 +6709,16 @@
         },
         {
             "name": "memio/spec-gen",
-            "version": "v0.8.4",
+            "version": "v0.8.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/memio/spec-gen.git",
-                "reference": "8ec785556fc305848d0298876362e2fb76705a46"
+                "reference": "be2d53a95a2bf102057f7561b0577933d89b25d0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/memio/spec-gen/zipball/8ec785556fc305848d0298876362e2fb76705a46",
-                "reference": "8ec785556fc305848d0298876362e2fb76705a46",
+                "url": "https://api.github.com/repos/memio/spec-gen/zipball/be2d53a95a2bf102057f7561b0577933d89b25d0",
+                "reference": "be2d53a95a2bf102057f7561b0577933d89b25d0",
                 "shasum": ""
             },
             "require": {
@@ -6735,7 +6735,7 @@
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^2.0",
-                "phpunit/phpunit": "^6.0"
+                "phpunit/phpunit": "^6.0 || ^7.0"
             },
             "type": "library",
             "extra": {
@@ -6769,7 +6769,7 @@
                 "php",
                 "phpspec"
             ],
-            "time": "2018-02-06T09:31:16+00:00"
+            "time": "2018-06-13T10:36:01+00:00"
         },
         {
             "name": "memio/twig-template-engine",
@@ -7470,12 +7470,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/prolic/fpp.git",
-                "reference": "2bfadfb1c67ca875bb3d9757a105c52fc6f82efa"
+                "reference": "8d0a37fcccc5721126af159c11d076e3c8a944f8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/prolic/fpp/zipball/2bfadfb1c67ca875bb3d9757a105c52fc6f82efa",
-                "reference": "2bfadfb1c67ca875bb3d9757a105c52fc6f82efa",
+                "url": "https://api.github.com/repos/prolic/fpp/zipball/8d0a37fcccc5721126af159c11d076e3c8a944f8",
+                "reference": "8d0a37fcccc5721126af159c11d076e3c8a944f8",
                 "shasum": ""
             },
             "require": {
@@ -7508,7 +7508,7 @@
                 }
             ],
             "description": "Functional PHP Preprocessor",
-            "time": "2018-06-13T09:18:31+00:00"
+            "time": "2018-06-13T16:30:07+00:00"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
