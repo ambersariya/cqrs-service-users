@@ -27,6 +27,10 @@ services:
         resource: '../src/Application/Query/**/*Handler.php'
         tags: [{ name: 'prooph_service_bus.read_users_query_bus.route_target', message_detection: true }]
 
+    App\Domain\Event\:
+        resource: '../src/Domain/Event/**/*Handler.php'
+        tags: [{ name: 'prooph_service_bus.user_event_bus.route_target', message_detection: true }]
+
     ### UI
     App\UI\Cli\Command\:
         resource: '../src/UI/Cli/Command'

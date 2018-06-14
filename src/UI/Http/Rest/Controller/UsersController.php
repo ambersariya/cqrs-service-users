@@ -76,7 +76,7 @@ class UsersController extends Controller
             }
 
             if ($exception->getPrevious() instanceof UserAlreadyExistsException) {
-                $message = sprintf('User already exists with email %s', $data['id']);
+                $message = sprintf('User already exists with email %s', $data['email']);
             }
 
             throw ApiProblemException::with(new ApiProblem(JsonResponse::HTTP_CONFLICT, $message));
@@ -112,7 +112,7 @@ class UsersController extends Controller
         $json = $this->container->get('jms_serializer')
             ->serialize($this->getUser(), 'json');
 
-        return new JsonResponse($json, JsonResponse::HTTP_OK);
+        return new JsonResponse($json, JsonResponse::HTTP_OK, [], true);
     }
 
     public function getUserAction(string $id)

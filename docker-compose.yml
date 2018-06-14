@@ -2,7 +2,7 @@ version: '3.5'
 
 services:
 
-    db_postgres:
+    db-event-store-postgres:
         image: postgres:10.4
         restart: always
         ports:
@@ -54,7 +54,7 @@ services:
         networks:
             - backend
         depends_on:
-            - db_postgres
+            - db-event-store-postgres
         environment:
             - PROOPH_ENV=development
             - APP_ENV=dev
@@ -64,7 +64,7 @@ services:
         volumes:
             - .:/app
         depends_on:
-            - db_postgres
+            - db-event-store-postgres
         networks:
             - backend
         command: php bin/console event-store:projection:run user_projection
