@@ -1,15 +1,13 @@
 prooph_service_bus:
     command_buses:
         user_command_bus: ~
-
+#            router:
+#                # Service ID of the async message producer e.g. for Amazon AWS SQS
+#                async_switch: 'my_async_message_producer'
+#            plugins:
+#                - 'async_command_router'
     event_buses:
         user_event_bus: ~
-#            plugins:
-#                - 'prooph_service_bus.on_event_invoke_strategy'
-#            router:
-#                type: 'prooph_service_bus.event_bus_router'
-#                routes:
-#                    App\Domain\Event\UserWasCreated\UserWasCreatedEvent: [ 'App\Domain\Event\UserWasCreated\UserWasCreatedEventHandler' ]
-#                    App\Domain\Event\ChangedEmailAddress\ChangedEmailAddressEvent: [ 'App\Domain\Event\ChangedEmailAddress\ChangedEmailAddressEventHandler' ]
+
     query_buses:
         read_users_query_bus: ~

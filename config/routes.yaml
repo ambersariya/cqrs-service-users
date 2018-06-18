@@ -3,6 +3,11 @@ index:
     controller: App\UI\Http\Rest\Controller\DefaultController::indexAction
     methods:    [GET, HEAD]
 
+health:
+    path: /health
+    controller: App\UI\Http\Rest\Controller\DefaultController::indexAction
+    methods:    [GET, HEAD]
+
 api_login_check:
     path: /login_check
 

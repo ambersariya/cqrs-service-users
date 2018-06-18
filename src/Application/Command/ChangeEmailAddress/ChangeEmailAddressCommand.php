@@ -7,7 +7,10 @@ declare(strict_types=1);
 
 namespace App\Application\Command\ChangeEmailAddress;
 
-final class ChangeEmailAddressCommand extends \Prooph\Common\Messaging\Command
+use Prooph\Common\Messaging\PayloadConstructable;
+use Prooph\ServiceBus\Async\AsyncMessage;
+
+final class ChangeEmailAddressCommand extends \Prooph\Common\Messaging\Command implements PayloadConstructable, AsyncMessage
 {
     use \Prooph\Common\Messaging\PayloadTrait;
 
@@ -33,11 +36,11 @@ final class ChangeEmailAddressCommand extends \Prooph\Common\Messaging\Command
 
     protected function setPayload(array $payload): void
     {
-        if (! isset($payload['userId']) || ! \is_string($payload['userId'])) {
+        if (!isset($payload['userId']) || !\is_string($payload['userId'])) {
             throw new \InvalidArgumentException("Key 'userId' is missing in payload or is not a string");
         }
 
-        if (! isset($payload['email']) || ! \is_string($payload['email'])) {
+        if (!isset($payload['email']) || !\is_string($payload['email'])) {
             throw new \InvalidArgumentException("Key 'email' is missing in payload or is not a string");
         }
 
