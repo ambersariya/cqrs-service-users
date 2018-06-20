@@ -6,7 +6,7 @@ namespace App\Domain\Event\UserWasCreated;
 
 use Psr\Log\LoggerInterface;
 
-class UserWasCreatedEventHandler
+class SendWelcomeEmailHandler
 {
     /**
      * @var LoggerInterface
@@ -18,10 +18,8 @@ class UserWasCreatedEventHandler
         $this->logger = $logger;
     }
 
-    public function _invoke(UserWasCreatedEvent $userWasCreatedEvent)
+    public function __invoke(UserWasCreatedEvent $userWasCreatedEvent)
     {
-        $this->logger->info($userWasCreatedEvent->messageName());
-        // send email
-        // notify some other service
+        $this->logger->info(sprintf('Danish - User was created. Sending email ...'));
     }
 }

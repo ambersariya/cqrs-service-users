@@ -16,7 +16,6 @@ return [
     Prooph\Bundle\ServiceBus\ProophServiceBusBundle::class => ['all' => true],
     JMS\SerializerBundle\JMSSerializerBundle::class => ['all' => true],
     Mhujer\JmsSerializer\Uuid\SymfonyBundle\MhujerJmsSerializerUuidBundle::class => ['all' => true],
-    Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle::class => ['all' => true],
     Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle::class => ['all' => true],
     Nelmio\CorsBundle\NelmioCorsBundle::class => ['all' => true],
     Enqueue\Bundle\EnqueueBundle::class => ['all' => true],

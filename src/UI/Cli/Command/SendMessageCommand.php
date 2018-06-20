@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace App\UI\Cli\Command;
 
-
+use Enqueue\Client\Message;
+use Enqueue\Client\ProducerInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -18,14 +19,10 @@ class SendMessageCommand extends ContainerAwareCommand
 
     public function execute(InputInterface $input, OutputInterface $output)
     {
-        /**
-         * @var \Enqueue\AmqpExt\AmqpContext\AmqpContext                  $context
-         * @var \Symfony\Component\DependencyInjection\ContainerInterface $container
-         */
-        $context = $this->getContainer()->get('enqueue.transport.context');
-        $queue = $context->createQueue('app_events');
-        $context->declareQueue($queue);
-        $message = $context->createMessage(json_encode(['hello' => 'world']));
-        $context->createProducer()->send($queue, $message);
+        /** @var ProducerInterface $producer * */
+        $producer = $this->getContainer()->get(ProducerInterface::class);
+        // send event to many consumers
+        $producer->sendEvent('app_events', new Message('Something has happened'));
+        $output->writeln('notified');
     }
 }

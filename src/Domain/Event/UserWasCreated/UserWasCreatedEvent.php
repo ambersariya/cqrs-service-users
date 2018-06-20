@@ -15,8 +15,6 @@ class UserWasCreatedEvent extends AggregateChanged
     private $name;
     protected $userId;
 
-//    protected $messageName = 'user-was-created-event';
-
     public static function withData(UserId $userId, Credentials $credentials, Name $name): UserWasCreatedEvent
     {
         /** @var self $event */

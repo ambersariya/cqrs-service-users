@@ -21,7 +21,7 @@ services:
             - "traefik.backend.healthcheck.interval=10s"
         volumes:
             - ./vendor/prooph/pdo-event-store/scripts/postgres:/docker-entrypoint-initdb.d
-            - ./var/data:/var/lib/postgresql
+            - eventstore-data:/var/lib/postgresql/data
         healthcheck:
             test: ["CMD", "curl", "-f", "http://localhost:5432"]
             interval: 30s
@@ -40,6 +40,8 @@ services:
             - "traefik.frontend.rule=Host:${API_HOSTNAME}"
             - "traefik.port=80"
             - "traefik.docker.network=web"
+            - "traefik.backend.healthcheck.path=/health"
+            - "traefik.backend.healthcheck.interval=10s"
         links:
             - php:php
         volumes:
@@ -57,12 +59,10 @@ services:
             - backend
         depends_on:
             - db-event-store-postgres
+            - message_queue
         environment:
             - PROOPH_ENV=development
             - APP_ENV=dev
-        labels:
-            - "traefik.backend.healthcheck.path=/health"
-            - "traefik.backend.healthcheck.interval=10s"
 
     projection_user:
         image: prooph/php:7.2-cli
@@ -70,6 +70,7 @@ services:
             - .:/app
         depends_on:
             - db-event-store-postgres
+            - message_queue
         networks:
             - backend
         command: php bin/console event-store:projection:run user_projection
@@ -84,10 +85,14 @@ services:
             RABBITMQ_DEFAULT_VHOST: "/"
         labels:
           - "traefik.frontend.rule=Host:${MESSAGE_QUEUE_HOSTNAME}"
+        networks:
+            - backend
+            - web
         ports:
-            - "15672:15672"
-            - "5672:5672"
-
+            - 15672:15672
+            - 5672:5672
+volumes:
+  eventstore-data:
 networks:
     web:
         external: true
