@@ -11,7 +11,7 @@ $ docker run --rm -it --volume $(pwd):/app prooph/composer:7.2 install
 # Fish shell
 $ docker run --rm -it --volume (pwd):/app prooph/composer:7.2 install
 # Git Bash on Windows
-$ docker run --rm -it --volume /$(pwd):/app prooph/composer:7.2 install
+$ docker run --rm -it -v "%cd%":/app prooph/composer:7.2 install
 $ docker-compose up -d
 
 
