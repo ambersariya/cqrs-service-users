@@ -1,5 +1,5 @@
 # users-service-prooph
-Prooph Event Sourcing Example
+A small application implementing Event Sourcing using Prooph components.
 
 ### Start
 ```shell
