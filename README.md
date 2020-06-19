@@ -1,4 +1,4 @@
-# users-service-prooph
+# Event Sourcing User Management App
 A small application implementing Event Sourcing using Prooph components.
 
 ### Start
